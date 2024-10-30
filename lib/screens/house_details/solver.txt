@@ -1,0 +1,2 @@
+({String comment, String displayName, String imageUrl, double rate, FieldValue timestamp})
+({String comment, String displayName, String imageUrl, double rate, Timestamp timestamp})

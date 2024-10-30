@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "545869663533",
+    "project_id": "samsar-first",
+    "storage_bucket": "samsar-first.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545869663533:android:ab6ec8b73022dc7f5317a4",
+        "android_client_info": {
+          "package_name": "com.samsar.samsar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545869663533-a3lao7580cfso213kah39n3uv5ugd89c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfW-ZWikq6WmA-uA8_Lt18SIWZoqDSxAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545869663533-a3lao7580cfso213kah39n3uv5ugd89c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "545869663533-ugjrbuglsha065k284e9ra40leelrvtq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samsar.samsar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

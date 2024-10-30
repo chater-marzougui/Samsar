@@ -1,0 +1,5 @@
+{
+  "title": "Bienvenue",
+  "greeting": "Bonjour, {name}!",
+  "description": "Ceci est une application Flutter multilingue."
+}
