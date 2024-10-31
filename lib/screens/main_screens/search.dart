@@ -6,6 +6,7 @@ import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/values/structures.dart';
 import '../../Widgets/widgets.dart';
 import '../../helpers/house_manager.dart';
+import '../../l10n/l10n.dart';
 import '../../values/app_routes.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -105,7 +106,7 @@ class _SearchScreenState extends State<SearchScreen>
                               color: Colors.grey[900],
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Change another location',
+                              hintText: S.of(context).changeToAnotherLoc,
                               hintStyle: const TextStyle(
                                   color: Colors.grey), // Subtle hint text color
                               border: InputBorder.none,
@@ -266,18 +267,19 @@ class _SearchScreenState extends State<SearchScreen>
                                               ),
                                               const SizedBox(height: 16),
                                               Text(
-                                                'No results found',
+                                                S.of(context).noResultsFound,
                                                 style: theme.textTheme.titleMedium?.copyWith(
                                                   color: theme.disabledColor,
                                                 ),
                                               ),
                                               const SizedBox(height: 8),
                                               Text(
-                                                'Try adjusting your search or filters',
+                                                S.of(context).adjustSearchOrFilters,
                                                 style: theme.textTheme.bodyMedium?.copyWith(
                                                   color: theme.disabledColor,
                                                 ),
                                               ),
+
                                             ],
                                           ),
                                         ),
@@ -319,7 +321,7 @@ class _SearchScreenState extends State<SearchScreen>
                                               ),
                                               const SizedBox(height: 8),
                                               Text(
-                                                'No more houses found',
+                                                S.of(context).noMoreHousesFound,
                                                 style: theme.textTheme.bodySmall?.copyWith(
                                                   color: theme.disabledColor,
                                                 ),
@@ -338,7 +340,7 @@ class _SearchScreenState extends State<SearchScreen>
                       else
                         SliverToBoxAdapter(
                           child: SizedBox(
-                            height: MediaQuery.of(context).size.height - 200, // Subtract approximate height of search bar and icons
+                            height: MediaQuery.of(context).size.height - 200,
                             child: Center(
                               child: CircularProgressIndicator(),
                             ),
@@ -360,16 +362,16 @@ class _SearchScreenState extends State<SearchScreen>
                     maxHeight: MediaQuery.of(context).size.height * 0.3,
                   ),
                   margin: const EdgeInsets.symmetric(
-                      horizontal: 16), // Adds padding around the dropdown
+                      horizontal: 16),
                   decoration: BoxDecoration(
                     color: Colors.white
-                        .withOpacity(0.9), // Semi-transparent background
-                    borderRadius: BorderRadius.circular(15), // Rounded corners
+                        .withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1), // Subtle shadow
+                        color: Colors.black.withOpacity(0.1),
                         blurRadius: 10,
-                        offset: const Offset(0, 4), // Slight elevation effect
+                        offset: const Offset(0, 4),
                       ),
                     ],
                   ),
@@ -385,9 +387,9 @@ class _SearchScreenState extends State<SearchScreen>
                           ListTile(
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
-                                vertical: 10), // Adds padding inside each ListTile
+                                vertical: 10),
                             tileColor: Colors
-                                .transparent, // White background for individual tiles
+                                .transparent,
                             title: Text(
                               _getLocationSubstring(place['display_name']),
                               style: theme.textTheme.bodySmall?.copyWith(
@@ -396,17 +398,17 @@ class _SearchScreenState extends State<SearchScreen>
                               ),
                             ),
                             leading: const Icon(Icons.location_on,
-                                color: Colors.blue), // Icon for location
+                                color: Colors.blue),
                             trailing: Icon(Icons.arrow_forward_ios,
                                 color: Colors.grey[400],
-                                size: 16), // Right arrow for visual indication
+                                size: 16),
                             onTap: () => _selectPlace(place),
                           ),
                           if (index < _searchResults.length - 1)
                             const Divider(
                                 height: 1,
                                 color: Colors
-                                    .grey), // Adds a divider between list items
+                                    .grey),
                         ],
                       );
                     },
@@ -474,14 +476,14 @@ class _SearchScreenState extends State<SearchScreen>
           builder: (context, setState) {
             return AlertDialog(
               title: Text(
-                'Sorting',
+                S.of(context).sorting,
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Max Distance: ${_maxAllowedDistance.round()}Km'),
+                  Text(S.of(context).maxDistance(_maxAllowedDistance.round())),
                   Slider(
                     min: 1,
                     max: 50,
@@ -496,7 +498,7 @@ class _SearchScreenState extends State<SearchScreen>
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Sort by:',
+                    S.of(context).sortBy,
                     style: theme.textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
@@ -513,7 +515,7 @@ class _SearchScreenState extends State<SearchScreen>
                         },
                       ),
                       Text(
-                        'Distance',
+                        S.of(context).distance,
                         style: theme.textTheme.titleSmall,
                         textAlign: TextAlign.center,
                       ),
@@ -527,7 +529,7 @@ class _SearchScreenState extends State<SearchScreen>
                         },
                       ),
                       Text(
-                        'Price',
+                        S.of(context).price,
                         style: theme.textTheme.titleSmall,
                         textAlign: TextAlign.center,
                       ),
@@ -537,13 +539,13 @@ class _SearchScreenState extends State<SearchScreen>
               ),
               actions: [
                 TextButton(
-                  child: const Text('Cancel'),
+                  child: Text(S.of(context).cancel),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: const Text('Apply'),
+                  child: Text(S.of(context).apply),
                   onPressed: () {
                     _sort();
                     Navigator.of(context).pop();
@@ -581,12 +583,10 @@ class _SearchScreenState extends State<SearchScreen>
           _searchResults = jsonDecode(response.body);
         });
       } else {
-        throw Exception('Failed to load search results');
+        if (mounted) throw Exception(S.of(context).failedToLoadSearchResults);
       }
     } catch (e) {
-      if (mounted) {
-        showSnackBar(context, 'Error searching for places');
-      }
+      if (mounted) showSnackBar(context, S.of(context).errorSearchingForPlaces);
     }
   }
 

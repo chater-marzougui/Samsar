@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../Widgets/widgets.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _updatePhoneNumber() async {
     if (!await _reauthenticateUser()) {
-      if (mounted) showSnackBar(context, "Authentication failed");
+      if (mounted) showSnackBar(context, S.of(context).authFailed);
       return;
     }
 
@@ -83,9 +84,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       await simpleUpdatePhoneNumber(phoneNumber);
     } catch (e) {
-      if (mounted) showSnackBar(context, "Error sending verification code: $e");
+      if (mounted) showSnackBar(context, '${S.of(context).verificationCodeError}: $e');
     }
   }
+
+  Future<void> simpleUpdatePhoneNumber(String phoneNumber) async {
+    try {
+      await db.collection('users').doc(user!.uid).update({
+        'phoneNumber': phoneNumber,
+      });
+      if (mounted) showSnackBar(context, S.of(context).phoneUpdateSuccess);
+    } catch (e) {
+      if (mounted) showSnackBar(context, '${S.of(context).updateError}: $e');
+    }
+  }
+
   /*
   Future<void> _verifyPhoneNumber(String phoneNumber) async {
     await _auth.verifyPhoneNumber(
@@ -165,24 +178,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
   */
-  Future<void> simpleUpdatePhoneNumber(String phoneNumber) async {
-    try {
-      await db.collection('users').doc(user!.uid).update({
-        'phoneNumber': phoneNumber,
-      });
-      if (mounted) showSnackBar(context, "Phone number updated successful");
-    } catch (e){
-      if (mounted) showSnackBar(context, "Error : $e");
-
-    }
-  }
 
 
   Future<void> _updateProfile() async {
 
     bool reauthenticated = await _reauthenticateUser();
     if (!reauthenticated) {
-      if (mounted) showSnackBar(context, "Wrong password");
+      if (mounted) showSnackBar(context, S.of(context).wrongPassword);
       return;
     }
 
@@ -222,10 +224,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         user = _auth.currentUser;
       });
 
-      if (mounted) showSnackBar(context, "Profile updated successfully");
+      if (mounted) showSnackBar(context, S.of(context).profileUpdatedSuccessfully);
 
     } catch (e) {
-      if (mounted) showSnackBar(context, "Error updating profile");
+      if (mounted) showSnackBar(context, S.of(context).errorUpdatingProfile);
     }
   }
 
@@ -233,15 +235,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     bool reauthenticated = await _reauthenticateUser();
 
     if (!reauthenticated) {
-      if (mounted) showSnackBar(context, "Wrong password");
+      if (mounted) showSnackBar(context, S.of(context).wrongPassword);
       return;
     }
 
     try {
       await user!.updatePassword(_newPasswordController.text);
-      if (mounted) showSnackBar(context, "Password updated successfully");
+      if (mounted) showSnackBar(context, S.of(context).passwordUpdatedSuccessfully);
     } catch (e) {
-      if (mounted) showSnackBar(context, "Error updating password: $e");
+      if (mounted) showSnackBar(context, S.of(context).errorUpdatingPassword(e));
     }
   }
 
@@ -249,14 +251,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (samsarUser == null) {
-      return const Scaffold(
+      return Scaffold(
         body: Center(child: CustomLoadingScreen(
-          message: "You're not authenticated!",
+          message: S.of(context).notLoggedIn,
         )),
       );
     } else {
       return Scaffold(
-        appBar: AppBar(title: const Text('Edit Profile')),
+        appBar: AppBar(title: Text(S.of(context).editProfile)),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -273,14 +275,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  buildTextField(context, _nameController, 'Name'),
-                  const SizedBox(height: 16),
-                  buildTextField(context, _middleNameController, 'Middle Name (optional)', validator: (value) => null),
-                  const SizedBox(height: 16),
-                  buildTextField(context, _lastNameController, 'Last Name'),
-                  const SizedBox(height: 16),
-                  buildTextField(context, _emailController, 'Email',
-                      validator: _emailValidator),
+                buildTextField(context, _nameController, S.of(context).name),
+                const SizedBox(height: 16),
+                buildTextField(context, _middleNameController, S.of(context).middleName, validator: (value) => null),
+                const SizedBox(height: 16),
+                buildTextField(context, _lastNameController, S.of(context).lastName),
+                const SizedBox(height: 16),
+                buildTextField(context, _emailController, S.of(context).email,
+                    validator: _emailValidator),
                   const SizedBox(height: 16),
                   buildPhoneNumberField(_phoneNumberController,
                       _selectedDialogCountry, _openCountryPickerDialog),
@@ -290,9 +292,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: _showUpdatePasswordDialog,
-                          child: Text('New Password',
-                              style: TextStyle(
-                                  fontSize: 13, color: theme.primaryColor)
+                          child: Text(
+                            S.of(context).newPassword,
+                            style: TextStyle(fontSize: 13, color: theme.primaryColor),
                           ),
                         ),
                       ),
@@ -306,7 +308,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               _showUpdateProfileDialog();
                             }
                           },
-                          child: Text('Save Changes',
+                          child: Text(S.of(context).saveChanges,
                               style: TextStyle(
                                   fontSize: 13, color: theme.primaryColor)
                           ),
@@ -325,36 +327,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _showUpdateProfileDialog() => showDialog(
-        context: context,
-        builder: (context) => Theme(
-          data: Theme.of(context),
-          child: Dialog(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 16),
-                  Text("Type your password to apply changes"),
-                  const SizedBox(height: 16),
-                  buildTextField(context, _passwordController, 'Password',
-                      obscureText: true),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      _updateProfile();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Apply Changes"),
-                  ),
-                ],
-              ),
+      context: context,
+      builder: (context) => Theme(
+        data: Theme.of(context),
+        child: Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 16),
+                Text(S.of(context).typeYourPasswordToApplyChanges), // Localized text
+                const SizedBox(height: 16),
+                buildTextField(context, _passwordController, S.of(context).password, // Localized text
+                    obscureText: true),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    _updateProfile();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(S.of(context).applyChanges), // Localized text
+                ),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
 
-  Future<void> _pickImage() async {
+      Future<void> _pickImage() async {
     final source = await _showImageSourceDialog();
     if (source != null) {
       final pickedFile = await ImagePicker().pickImage(source: source);
@@ -370,17 +372,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Select Image Source'),
-        content: Text('Choose an image source'),
+        title: Text(S.of(context).selectImageSource),
+        content: Text(S.of(context).chooseAnImageSource),
         actions: [
           TextButton(
-            child: Text('Camera'),
+            child: Text(S.of(context).camera),
             onPressed: () {
               Navigator.of(context).pop(ImageSource.camera);
             },
           ),
           TextButton(
-            child: Text('Gallery'),
+            child: Text(S.of(context).gallery),
             onPressed: () {
               Navigator.of(context).pop(ImageSource.gallery);
             },
@@ -412,117 +414,121 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       await user!.reauthenticateWithCredential(credential);
       return true;
     } catch (e) {
-      if (mounted) showSnackBar(context, "Check your password and try again");
+      if (mounted) showSnackBar(context, S.of(context).wrongPassword);
       return false;
     }
   }
 
   void _showUpdatePasswordDialog() => showDialog(
-        context: context,
-        builder: (context) => Theme(
-          data: Theme.of(context),
-          child: Dialog(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+    context: context,
+    builder: (context) => Theme(
+      data: Theme.of(context),
+      child: Dialog(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              Text(S.of(context).typeYourPasswordToApplyChanges), // Localized text
+              const SizedBox(height: 16),
+              buildTextField(context, _passwordController, S.of(context).oldPassword, // Localized
+                  obscureText: true),
+              const SizedBox(height: 16),
+              buildTextField(
+                  context, _newPasswordController, S.of(context).newPassword,
+                  obscureText: true),
+              const SizedBox(height: 16),
+              buildTextField(context, _confirmPasswordController,
+                  S.of(context).confirmNewPassword, // Localized
+                  obscureText: true),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(height: 16),
-                  Text("Type your password to apply changes"),
-                  const SizedBox(height: 16),
-                  buildTextField(context, _passwordController, 'Old Password',
-                      obscureText: true),
-                  const SizedBox(height: 16),
-                  buildTextField(
-                      context, _newPasswordController, 'New Password',
-                      obscureText: true),
-                  const SizedBox(height: 16),
-                  buildTextField(context, _confirmPasswordController,
-                      'Confirm New Password',
-                      obscureText: true),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () async {
-                          Navigator.of(context).pop();
-                          _showRecoverPasswordDialog();
-                        },
-                        child: Text("Forgot Password?"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          // Validate the passwords
-                          if (_newPasswordController.text !=
-                              _confirmPasswordController.text) {
-                            showSnackBar(context, "Passwords do not match");
-                            return;
-                          }
-                          try {
-                            _updatePassword();
-                            Navigator.of(context).pop();
-                            showSnackBar(
-                                context, "Password updated successfully");
-                          } catch (e) {
-                            showSnackBar(
-                                context, "Error updating password: $e");
-                          }
-                        },
-                        child: Text("Apply"),
-                      ),
-                    ],
+                  TextButton(
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      _showRecoverPasswordDialog();
+                    },
+                    child: Text(S.of(context).forgotPassword), // Localized
                   ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-
-  void _showRecoverPasswordDialog() => showDialog(
-        context: context,
-        builder: (dialogContext) => Theme(
-          data: Theme.of(context),
-          child: Dialog(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 16),
-                  Text("Enter your email to recover your password"),
-                  const SizedBox(height: 16),
-                  buildTextField(dialogContext, _emailController, 'Email',
-                      obscureText: false),
-                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () async {
+                      // Validate the passwords
+                      if (_newPasswordController.text !=
+                          _confirmPasswordController.text) {
+                        showSnackBar(context, S.of(context).passwordsDoNotMatch); // Localized
+                        return;
+                      }
                       try {
-                        await FirebaseAuth.instance.sendPasswordResetEmail(
-                            email: _emailController.text);
-
-                        if(dialogContext.mounted) {
-                          Navigator.of(dialogContext).pop();
-                          showSnackBar(dialogContext,
-                              "Password recovery email sent successfully");
-                        }
+                        _updatePassword();
+                        Navigator.of(context).pop();
+                        showSnackBar(
+                            context, S.of(context).passwordUpdatedSuccessfully); // Localized
                       } catch (e) {
-                        if(dialogContext.mounted) showSnackBar(dialogContext, "Error sending password recovery email: $e");
+                        showSnackBar(
+                            context, S.of(context).errorUpdatingPassword(e.toString())); // Localized with error message
                       }
                     },
-                    child: Text("Send Recovery Email"),
+                    child: Text(S.of(context).applyChanges), // Localized
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
-      );
+      ),
+    ),
+  );
+
+  void _showRecoverPasswordDialog() => showDialog(
+    context: context,
+    builder: (dialogContext) => Theme(
+      data: Theme.of(context),
+      child: Dialog(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              Text(S.of(context).enterYourEmailToRecoverPassword), // Localized text
+              const SizedBox(height: 16),
+              buildTextField(dialogContext, _emailController, S.of(context).email, // Localized
+                  obscureText: false),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.sendPasswordResetEmail(
+                        email: _emailController.text);
+
+                    if (mounted) {
+                      Navigator.of(dialogContext).pop();
+                      showSnackBar(context,
+                          S.of(context).passwordRecoveryEmailSentSuccessfully); // Localized
+                    }
+                  } catch (e) {
+                    if (mounted) {
+                      showSnackBar(context,
+                          S.of(context).errorSendingPasswordRecoveryEmail(e.toString())); // Localized with error message
+                    }
+                  }
+                },
+                child: Text(S.of(context).sendRecoveryEmail), // Localized
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+
 
   String? _emailValidator(String? value) {
     if (value == null || !value.contains('@')) {
-      return 'Please enter a valid email';
+      return S.of(context).invalidEmail;
     }
     return null;
   }
@@ -544,13 +550,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             data: Theme.of(context),
             child: CountryPickerDialog(
               titlePadding: const EdgeInsets.all(8.0),
-              searchInputDecoration:
-                  const InputDecoration(hintText: 'Search...'),
+              searchInputDecoration: InputDecoration(hintText: "${S.of(context).search}..."), // Localized hint text
               isSearchable: true,
-              title: const Text(
-                'Select your phone code',
-                style: TextStyle(fontSize: 18),
+              title: Text(
+                S.of(context).selectYourPhoneCode, // Localized title
+                style: const TextStyle(fontSize: 18),
               ),
+
               onValuePicked: (Country country) =>
                   setState(() => _selectedDialogCountry = country),
               itemFilter: (c) => 'IL' != c.isoCode,

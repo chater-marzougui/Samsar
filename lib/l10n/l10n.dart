@@ -909,6 +909,586 @@ class S {
       args: [error],
     );
   }
+
+  /// `change to another location`
+  String get changeToAnotherLoc {
+    return Intl.message(
+      'change to another location',
+      name: 'changeToAnotherLoc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load search results`
+  String get failedToLoadSearchResults {
+    return Intl.message(
+      'Failed to load search results',
+      name: 'failedToLoadSearchResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error searching for places`
+  String get errorSearchingForPlaces {
+    return Intl.message(
+      'Error searching for places',
+      name: 'errorSearchingForPlaces',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Houses`
+  String get myHouses {
+    return Intl.message(
+      'My Houses',
+      name: 'myHouses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favourite Houses`
+  String get favouriteHouses {
+    return Intl.message(
+      'Favourite Houses',
+      name: 'favouriteHouses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Account`
+  String get personalAccount {
+    return Intl.message(
+      'Personal Account',
+      name: 'personalAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Support`
+  String get contactSupport {
+    return Intl.message(
+      'Contact Support',
+      name: 'contactSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading user data: {e}`
+  String errorLoadingUserData(Object e) {
+    return Intl.message(
+      'Error loading user data: $e',
+      name: 'errorLoadingUserData',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// `Error signing out: {e}`
+  String errorSigningOut(Object e) {
+    return Intl.message(
+      'Error signing out: $e',
+      name: 'errorSigningOut',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// `Are you sure you want to logout?`
+  String get logoutConfirmation {
+    return Intl.message(
+      'Are you sure you want to logout?',
+      name: 'logoutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found`
+  String get noResultsFound {
+    return Intl.message(
+      'No results found',
+      name: 'noResultsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try adjusting your search or filters`
+  String get adjustSearchOrFilters {
+    return Intl.message(
+      'Try adjusting your search or filters',
+      name: 'adjustSearchOrFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more houses found`
+  String get noMoreHousesFound {
+    return Intl.message(
+      'No more houses found',
+      name: 'noMoreHousesFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get apply {
+    return Intl.message(
+      'Apply',
+      name: 'apply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorting`
+  String get sorting {
+    return Intl.message(
+      'Sorting',
+      name: 'sorting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max Distance: {e} Km`
+  String maxDistance(Object e) {
+    return Intl.message(
+      'Max Distance: $e Km',
+      name: 'maxDistance',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// `Sort by:`
+  String get sortBy {
+    return Intl.message(
+      'Sort by:',
+      name: 'sortBy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Distance`
+  String get distance {
+    return Intl.message(
+      'Distance',
+      name: 'distance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support request sent successfully!`
+  String get supportRequestSent {
+    return Intl.message(
+      'Support request sent successfully!',
+      name: 'supportRequestSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to send support request. Please try again.`
+  String get supportRequestFailed {
+    return Intl.message(
+      'Failed to send support request. Please try again.',
+      name: 'supportRequestFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your name`
+  String get enterName {
+    return Intl.message(
+      'Enter your name',
+      name: 'enterName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email`
+  String get enterEmail {
+    return Intl.message(
+      'Enter your email',
+      name: 'enterEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject`
+  String get subject {
+    return Intl.message(
+      'Subject',
+      name: 'subject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the subject`
+  String get enterSubject {
+    return Intl.message(
+      'Enter the subject',
+      name: 'enterSubject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get message {
+    return Intl.message(
+      'Message',
+      name: 'message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe your issue`
+  String get describeIssue {
+    return Intl.message(
+      'Describe your issue',
+      name: 'describeIssue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or contact Us directly`
+  String get contactUsDirectly {
+    return Intl.message(
+      'Or contact Us directly',
+      name: 'contactUsDirectly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{e} is required`
+  String fieldRequired(Object e) {
+    return Intl.message(
+      '$e is required',
+      name: 'fieldRequired',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// `Enter a valid email address`
+  String get invalidEmail {
+    return Intl.message(
+      'Enter a valid email address',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Authentication failed`
+  String get authFailed {
+    return Intl.message(
+      'Authentication failed',
+      name: 'authFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error sending verification code`
+  String get verificationCodeError {
+    return Intl.message(
+      'Error sending verification code',
+      name: 'verificationCodeError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number updated successfully`
+  String get phoneUpdateSuccess {
+    return Intl.message(
+      'Phone number updated successfully',
+      name: 'phoneUpdateSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get updateError {
+    return Intl.message(
+      'Error',
+      name: 'updateError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong password`
+  String get wrongPassword {
+    return Intl.message(
+      'Wrong password',
+      name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profileUpdatedSuccessfully {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profileUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating profile`
+  String get errorUpdatingProfile {
+    return Intl.message(
+      'Error updating profile',
+      name: 'errorUpdatingProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password updated successfully`
+  String get passwordUpdatedSuccessfully {
+    return Intl.message(
+      'Password updated successfully',
+      name: 'passwordUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating password: {error}`
+  String errorUpdatingPassword(Object error) {
+    return Intl.message(
+      'Error updating password: $error',
+      name: 'errorUpdatingPassword',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Edit Personal Account`
+  String get editProfile {
+    return Intl.message(
+      'Edit Personal Account',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Middle Name (optional)`
+  String get middleName {
+    return Intl.message(
+      'Middle Name (optional)',
+      name: 'middleName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get lastName {
+    return Intl.message(
+      'Last Name',
+      name: 'lastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your password to apply changes`
+  String get typeYourPasswordToApplyChanges {
+    return Intl.message(
+      'Type your password to apply changes',
+      name: 'typeYourPasswordToApplyChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply Changes`
+  String get applyChanges {
+    return Intl.message(
+      'Apply Changes',
+      name: 'applyChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Image Source`
+  String get selectImageSource {
+    return Intl.message(
+      'Select Image Source',
+      name: 'selectImageSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose an image source`
+  String get chooseAnImageSource {
+    return Intl.message(
+      'Choose an image source',
+      name: 'chooseAnImageSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old Password`
+  String get oldPassword {
+    return Intl.message(
+      'Old Password',
+      name: 'oldPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm New Password`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'passwordsDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email to recover your password`
+  String get enterYourEmailToRecoverPassword {
+    return Intl.message(
+      'Enter your email to recover your password',
+      name: 'enterYourEmailToRecoverPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password recovery email sent successfully`
+  String get passwordRecoveryEmailSentSuccessfully {
+    return Intl.message(
+      'Password recovery email sent successfully',
+      name: 'passwordRecoveryEmailSentSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error sending password recovery email: {error}`
+  String errorSendingPasswordRecoveryEmail(Object error) {
+    return Intl.message(
+      'Error sending password recovery email: $error',
+      name: 'errorSendingPasswordRecoveryEmail',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Send Recovery Email`
+  String get sendRecoveryEmail {
+    return Intl.message(
+      'Send Recovery Email',
+      name: 'sendRecoveryEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select your phone code`
+  String get selectYourPhoneCode {
+    return Intl.message(
+      'Select your phone code',
+      name: 'selectYourPhoneCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

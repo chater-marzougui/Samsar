@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/values/app_constants.dart';
 import '../../Widgets/widgets.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
 class ContactSupportScreen extends StatefulWidget {
@@ -50,15 +51,14 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
       }, SetOptions(merge: true));
 
       if (mounted) {
-        showSnackBar(context, 'Support request sent successfully!');
+        showSnackBar(context, S.of(context).supportRequestSent);
       }
 
       _subjectController.clear();
       _messageController.clear();
     } catch (e) {
       if (mounted) {
-        showSnackBar(
-            context, 'Failed to send support request. Please try again.');
+        showSnackBar(context, S.of(context).supportRequestFailed);
       }
     } finally {
       setState(() {
@@ -88,7 +88,7 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contact Support'),
+        title: Text(S.of(context).contactSupport),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -100,43 +100,54 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    buildTextField(_nameController, 'Name', 'Enter your name'),
                     buildTextField(
-                        _emailController, 'Email', 'Enter your email',
-                        email: true),
+                      _nameController,
+                      S.of(context).name,
+                      S.of(context).enterName,
+                    ),
                     buildTextField(
-                        _subjectController, 'Subject', 'Enter the subject'),
+                      _emailController,
+                      S.of(context).email,
+                      S.of(context).enterEmail,
+                      email: true,
+                    ),
+                    buildTextField(
+                      _subjectController,
+                      S.of(context).subject,
+                      S.of(context).enterSubject,
+                    ),
                     buildTextField(
                       _messageController,
-                      'Message',
-                      'Describe your issue',
+                      S.of(context).message,
+                      S.of(context).describeIssue,
                       maxLines: 10,
                     ),
                     SizedBox(height: 20),
                     _isLoading
                         ? Center(child: CircularProgressIndicator())
                         : ElevatedButton(
-                            style: theme.elevatedButtonTheme.style,
-                            onPressed: _submitSupportRequest,
-                            child: Text('Submit'),
-                          ),
+                          style: theme.elevatedButtonTheme.style,
+                          onPressed: _submitSupportRequest,
+                          child: Text(S.of(context).submit),
+                    ),
                   ],
                 ),
               ),
+
               const SizedBox(height: 30),
               buildInfoCard(
                 context,
                 Icons.support_agent_sharp,
-                'Or Contact Us Directly',
+                S.of(context).contactUsDirectly,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildDetailRow(context, Icons.location_on_outlined,
-                        'Location', AppConstants.contactInfo.location,
+                        S.of(context).location, AppConstants.contactInfo.location,
                         wrapText: true),
-                    buildDetailRow(context, Icons.phone, 'Phone',
+                    buildDetailRow(context, Icons.phone, S.of(context).phone,
                         AppConstants.contactInfo.phoneNumber),
-                    buildDetailRow(context, Icons.email, 'Email',
+                    buildDetailRow(context, Icons.email, S.of(context).email,
                         AppConstants.contactInfo.email,
                         wrapText: true),
                   ],
@@ -165,10 +176,10 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
         maxLines: maxLines,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return '$label is required';
+            return S.of(context).fieldRequired(label);
           }
           if (email && !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-            return 'Enter a valid email address';
+            return S.of(context).invalidEmail;
           }
           return null;
         },

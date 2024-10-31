@@ -3,6 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:samsar/Widgets/widgets.dart';
 import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/values/app_routes.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -52,11 +53,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         samsarUser = _userManager.samsarUser;
       });
     } catch (e) {
-      if (mounted) showSnackBar(context, 'Error loading user data: $e');
+      if (mounted) showSnackBar(context, S.of(context).errorLoadingUserData(e));
     }
   }
 
-  // Authentication methods
   Future<void> _signOut(BuildContext context) async {
     try {
       await _userManager.signOut();
@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Navigator.pushReplacementNamed(context, AppRoutes.login);
       }
     } catch (e) {
-      if (context.mounted) showSnackBar(context, 'Error signing out: $e');
+      if (context.mounted) showSnackBar(context, S.of(context).errorSigningOut(e));
     }
   }
 
@@ -72,24 +72,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text("Logout"),
-        content: const Text("Are you sure you want to logout?"),
+        title: Text(S.of(context).logout),
+        content: Text(S.of(context).logoutConfirmation),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text("Cancel"),
+            child: Text(S.of(context).cancel),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               _signOut(context);
             },
-            child: const Text("Logout"),
+            child: Text(S.of(context).logout),
           ),
         ],
       ),
     );
   }
+
 
   Widget _buildProfileImage() {
     return CircleAvatar(
@@ -122,24 +123,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
         settingScreenItem(
           context,
           icon: Icons.settings,
-          itemName: "Settings",
+          itemName: S.of(context).settings,
           page: AppRoutes.appSettings,
         ),
         settingScreenItem(
           context,
           imagePath: "assets/icons/my_houses.png",
-          itemName: "My Houses",
+          itemName: S.of(context).myHouses,
           page: AppRoutes.myHouses,
         ),
         settingScreenItem(
           context,
           imagePath: "assets/icons/fav_houses.png",
-          itemName: "Favourite Houses",
+          itemName: S.of(context).favouriteHouses,
           page: AppRoutes.favouriteHouses,
         ),
         ListTile(
           leading: Icon(Icons.person_rounded, color: theme.primaryColor),
-          title: Text("Personal Account", style: theme.textTheme.titleSmall),
+          title: Text(S.of(context).personalAccount, style: theme.textTheme.titleSmall),
           onTap: () {
             Navigator.pushNamed(context, AppRoutes.editProfile)
                 .then((_) => _loadUserData());
@@ -148,16 +149,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         settingScreenItem(
           context,
           icon: Icons.support_agent,
-          itemName: "Contact Support",
+          itemName: S.of(context).contactSupport,
           page: AppRoutes.contactSupport,
         ),
         ListTile(
           leading: Icon(Icons.exit_to_app, color: theme.primaryColor),
-          title: Text("Logout", style: theme.textTheme.titleSmall),
+          title: Text(S.of(context).logout, style: theme.textTheme.titleSmall),
           onTap: () => _handleLogout(context),
         ),
       ],
     );
+
   }
 
   @override

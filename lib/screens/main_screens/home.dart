@@ -8,6 +8,7 @@ import 'package:samsar/values/structures.dart';
 import '../../Widgets/widgets.dart';
 import '../../helpers/CachedTileProvider.dart';
 import '../../helpers/house_manager.dart';
+import '../../l10n/l10n.dart';
 import '../../values/app_routes.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -169,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.grey[900],
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Change another location',
+                            hintText: S.of(context).changeToAnotherLoc,
                             hintStyle: TextStyle(color: Colors.grey[500]),
                             border: InputBorder.none,
                             prefixIcon:
@@ -319,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: _houseManager.applyPolygonFilter ? 50 : 0,
                       child: _houseManager.applyPolygonFilter
                           ? buildFloatingButton(
-                        tag: "Cancel Filter+Draw Button",
+                        tag: 'Cancel Filter+Draw Button',
                         onPressed: () {
                           setState(() {
                             _houseManager.turnOffPolygonFilter();
@@ -331,22 +332,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           : null,
                     ),
                     buildFloatingButton(
-                      tag: "Toggle draw on map",
+                      tag: 'Toggle draw on map',
                       onPressed: _toggleDrawing,
                       image: _isDrawing
                           ? 'assets/icons/draw_on_map.png'
-                          : "assets/icons/no_draw_on_map.png",
+                          : 'assets/icons/no_draw_on_map.png',
                       backgroundColor: Colors.blue,
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 buildFloatingButton(
-                  tag: "Toggle change position",
+                  tag: 'Toggle change position',
                   onPressed: _toggleChangePosition,
                   image: _isChoosingPosition
                       ? 'assets/icons/choose_position.png'
-                      : "assets/icons/no_choose_position.png",
+                      : 'assets/icons/no_choose_position.png',
                   backgroundColor: Colors.blue,
                 ),
               ],
@@ -475,12 +476,10 @@ class _HomeScreenState extends State<HomeScreen> {
           _searchResults = jsonDecode(response.body);
         });
       } else {
-        throw Exception('Failed to load search results');
+        if (mounted) throw Exception(S.of(context).failedToLoadSearchResults);
       }
     } catch (e) {
-      if (mounted) {
-        showSnackBar(context, 'Error searching for places');
-      }
+      if (mounted) showSnackBar(context, S.of(context).errorSearchingForPlaces);
     }
   }
 
