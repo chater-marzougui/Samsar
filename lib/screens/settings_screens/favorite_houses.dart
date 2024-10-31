@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:samsar/Widgets/widgets.dart';
 import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/values/app_routes.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
 class FavouriteHousesPage extends StatefulWidget {
@@ -83,7 +84,7 @@ class _FavouriteHousesPageState extends State<FavouriteHousesPage> {
       setState(() {
         _isLoading = false;
       });
-      if (mounted) showSnackBar(context, "Error fetching houses: $e");
+      if (mounted) showSnackBar(context, S.of(context).errorFetchingHouses);
     }
   }
 
@@ -99,13 +100,13 @@ class _FavouriteHousesPageState extends State<FavouriteHousesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Favourite Houses"),
+        title: Text(S.of(context).favouriteHouses),
         backgroundColor: Colors.blueAccent,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _userFavouriteHouses.isEmpty
-          ? const Center(child: Text("You don't have any houses listed."))
+          ? Center(child:Text(S.of(context).noHousesListed))
           : RefreshIndicator(
               onRefresh: _refreshFavHouses,
               child: ListView.builder(
@@ -158,7 +159,7 @@ class FavouriteHouseOverviewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${house.specs.type} in ${house.location.city}",
+                      "${house.specs.type} ${S.of(context).dans} ${house.location.city}",
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

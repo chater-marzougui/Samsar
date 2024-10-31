@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:samsar/Widgets/widgets.dart';
 import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/values/app_routes.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
 class MyHousesPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MyHousesPageState extends State<MyHousesPage> {
       setState(() {
         _isLoading = false;
       });
-      if (mounted) showSnackBar(context, "Error fetching houses: $e");
+      if (mounted) showSnackBar(context, S.of(context).errorFetchingHouses);
     }
   }
 
@@ -51,13 +52,13 @@ class _MyHousesPageState extends State<MyHousesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Houses"),
+        title: Text(S.of(context).myHouses),
         backgroundColor: Colors.blueAccent,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _userHouses.isEmpty
-          ? const Center(child: Text("You don't have any houses listed."))
+          ? Center(child: Text(S.of(context).noHousesListed))
           : RefreshIndicator(
         onRefresh: _refreshUserHouses,
         child: ListView.builder(
@@ -190,7 +191,7 @@ class MyHouseOverviewItem extends StatelessWidget {
         const Spacer(),
         if (house.status.isForRent)
           Text(
-            'For Rent',
+            S().forSale,
             style: theme.textTheme.bodySmall?.copyWith(color: Colors.blue),
           ),
         if (house.status.isForRent && house.status.isForSale)
@@ -200,7 +201,7 @@ class MyHouseOverviewItem extends StatelessWidget {
           ),
         if (house.status.isForSale)
           Text(
-            'For Sale',
+            S().forSale,
             style: theme.textTheme.bodySmall?.copyWith(color: Colors.green),
           ),
       ],
@@ -212,7 +213,7 @@ class MyHouseOverviewItem extends StatelessWidget {
       children: [
         Icon(Icons.home, size: 16, color: theme.hintColor),
         const SizedBox(width: 4),
-        Text('${house.specs.rooms} rooms'),
+        Text('${house.specs.rooms} ${S().bedrooms}'),
         const SizedBox(width: 16),
         Icon(Icons.square_foot, size: 16, color: theme.hintColor),
         const SizedBox(width: 4),
@@ -227,7 +228,7 @@ class MyHouseOverviewItem extends StatelessWidget {
         Icon(Icons.access_time, size: 16, color: theme.hintColor),
         const SizedBox(width: 4),
         Text(
-          'Updated ${_formatDate(house.updatedAt)}',
+          '${S().update} ${_formatDate(house.updatedAt)}',
           style: theme.textTheme.bodySmall,
         ),
         const Spacer(),
@@ -256,7 +257,7 @@ class MyHouseOverviewItem extends StatelessWidget {
   Widget _buildAvailabilityChip(ThemeData theme) {
     return Chip(
       label: Text(
-        house.status.isAvailable ? 'Available' : 'Not Available',
+        house.status.isAvailable ? S().available : S().notAvailable,
         style: theme.textTheme.bodySmall?.copyWith(
           color: Colors.white,
           fontWeight: FontWeight.bold,
@@ -269,18 +270,19 @@ class MyHouseOverviewItem extends StatelessWidget {
   }
 
   String _formatDate(DateTime? date) {
-    if (date == null) return 'N/A';
+    if (date == null) return S().notAvailable; // Localized 'N/A'
     final difference = DateTime.now().difference(date);
+
     if (difference.inDays > 365) {
-      return '${(difference.inDays / 365).floor()} year(s) ago';
+      return S().year((difference.inDays / 365).floor()); // Localized year(s)
     } else if (difference.inDays > 30) {
-      return '${(difference.inDays / 30).floor()} month(s) ago';
+      return S().month((difference.inDays / 30).floor()); // Localized month(s)
     } else if (difference.inDays > 0) {
-      return '${difference.inDays} day(s) ago';
+      return S().day(difference.inDays); // Localized day(s)
     } else if (difference.inHours > 0) {
-      return '${difference.inHours} hour(s) ago';
+      return S().hour(difference.inHours); // Localized hour(s)
     } else {
-      return 'Recently';
+      return S().recently; // Localized 'Recently'
     }
   }
 }

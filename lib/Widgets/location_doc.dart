@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../helpers/CachedTileProvider.dart';
+import '../l10n/l10n.dart';
 import '../values/structures.dart';
 
 class POI {
@@ -99,7 +100,7 @@ class _LocationDocWidgetState extends State<LocationDocWidget> {
                 Icon(Icons.location_on, size: 24, color: theme.iconTheme.color),
                 const SizedBox(width: 8),
                 Text(
-                  'Address',
+                  S.of(context).address,
                   style: theme.textTheme.titleLarge!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -166,7 +167,7 @@ class _LocationDocWidgetState extends State<LocationDocWidget> {
                         fetchPOIs();
                       },
                       icon: const Icon(Icons.my_location),
-                      label: const Text("Recenter"),
+                      label: Text(S.of(context).recenter),
                     ),
                   ),
                 ],

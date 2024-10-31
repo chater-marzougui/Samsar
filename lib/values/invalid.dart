@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'app_strings.dart';
+import '../l10n/l10n.dart';
 
 class InvalidRoute extends StatelessWidget {
   const InvalidRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Text(
-          AppStrings.uhOhPageNotFound,
+          S.of(context).uhOhPageNotFound,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),

@@ -53,25 +53,6 @@ class Address {
       required this.country,
       required this.countryCode});
 
-  // factory Address.fromJson(Map<String, dynamic> json) {
-  //   bool _isNormalType = json['country'] != null;
-  //   if(_isNormalType) {
-  //     return Address(
-  //       road: json['road'] ?? "",
-  //       suburb: json['suburb'] ?? "",
-  //       village: json['village'] ?? "",
-  //       stateDistrict: json['state_district'] ?? "",
-  //       state: json['state'] ?? "",
-  //       postcode: json['postcode'] ?? "",
-  //       county: json['postcode'] ?? "",
-  //       country: json['country'] ?? "",
-  //       countryCode: json['country_code'] ?? "");
-  //   } else {
-  //     for (var component in location.addressComponents!) {
-  //       print('${component.type}: ${component.localname}');
-  //     }
-  //   }
-  // }
   factory Address.fromJson(Map<String, dynamic> json) {
     bool isNormalType = json['country'] != null;
 

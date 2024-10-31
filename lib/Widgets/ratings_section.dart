@@ -56,9 +56,8 @@ class _RatingSectionState extends State<RatingSection> {
                         size: 24, color: theme.iconTheme.color),
                     const SizedBox(width: 8),
                     Text(
-                      "Rating",
-                      style: theme.textTheme.titleLarge!
-                          .copyWith(fontWeight: FontWeight.bold),
+                      S.of(context).rating,
+                      style: theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -68,7 +67,7 @@ class _RatingSectionState extends State<RatingSection> {
                     icon: const Icon(Icons.rate_review),
                     style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(
                         theme.dividerColor)),
-                    label: Text(hasRated ? 'Change Rate' : 'Rate'),
+                    label: Text(hasRated ? S.of(context).changeRating : S.of(context).rate), // Localized button text
                   ),
               ],
             ),
@@ -80,13 +79,12 @@ class _RatingSectionState extends State<RatingSection> {
                   const SizedBox(height: 8),
                   Text(
                     averageRating == 0
-                        ? 'No ratings yet'
+                        ? S.of(context).noRatings
                         : '${averageRating.toStringAsFixed(1)}/5',
                     style: theme.textTheme.titleMedium,
                   ),
                   Text(
-                    '(${widget.house.rate.raters} ${widget.house.rate.raters ==
-                        1 ? 'rating' : 'ratings'})',
+                    '(${widget.house.rate.raters} ${widget.house.rate.raters == 1 ? S.of(context).ratingSingle : S.of(context).ratingMultiple})', // Localized rating count
                     style: theme.textTheme.labelMedium,
                   ),
                 ],
@@ -97,7 +95,7 @@ class _RatingSectionState extends State<RatingSection> {
               const Divider(),
               const SizedBox(height: 8),
               Text(
-                'Reviews',
+                S.of(context).reviews,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.titleLarge!.copyWith(
                   fontWeight: FontWeight.bold,
@@ -214,31 +212,29 @@ class _RatingSectionState extends State<RatingSection> {
   Future<void> _showDeleteConfirmation(Rating rating) async {
     return showDialog(
       context: context,
-      builder: (context) =>
-          AlertDialog(
-            title: const Text('Delete Rating'),
-            content: const Text('Are you sure you want to delete your rating?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _deleteRating(rating);
-                },
-                child: const Text(
-                    'Delete', style: TextStyle(color: Colors.red)),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: Text(S.of(context).deleteRating),
+        content: Text(S.of(context).deleteRatingConfirmation),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(S.of(context).cancel),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _deleteRating(rating);
+            },
+            child: Text(S.of(context).delete, style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
     );
   }
 
   Future<void> _submitRating() async {
     if (_userRating == 0) {
-      showSnackBar(context, "Please select a rating");
+      showSnackBar(context, S.of(context).selectRating);
       return;
     }
 
@@ -248,12 +244,12 @@ class _RatingSectionState extends State<RatingSection> {
       final user = _userManager.samsarUser!;
 
       final Rating newRating = (
-      uid: user.uid,
-      displayName: user.displayName,
-      imageUrl: user.profileImage,
-      rate: _userRating,
-      comment: _commentController.text.trim(),
-      timestamp: DateTime.now(),
+        comment: _commentController.text.trim(),
+        displayName: user.displayName,
+        imageUrl: user.profileImage,
+        rate: _userRating,
+        timestamp: DateTime.now(),
+        uid: user.uid,
       );
 
       await _userManager.rateHouse(newRating, widget.house);
@@ -266,11 +262,11 @@ class _RatingSectionState extends State<RatingSection> {
       widget.onRatingUpdated();
 
       if (mounted) {
-        showSnackBar(context, 'Rating submitted successfully');
+        showSnackBar(context, S.of(context).ratingSubmitted);
       }
     } catch (e) {
       if (mounted) {
-        showSnackBar(context, 'Error submitting rating try again later');
+        showSnackBar(context, S.of(context).errorSubmittingRating);
       }
     } finally {
       setState(() => _isSubmitting = false);
@@ -283,35 +279,37 @@ class _RatingSectionState extends State<RatingSection> {
       await _userManager.deleteRating(rating, widget.house);
       widget.onRatingUpdated();
       if (mounted) {
-        showSnackBar(context, 'Rating deleted successfully');
+        showSnackBar(context, S.of(context).ratingDeleted);
       }
     } catch (e) {
       if (mounted) {
-        showSnackBar(context, 'Error deleting rating');
+        showSnackBar(context, S.of(context).errorDeletingRating);
       }
     } finally {
       setState(() => _isSubmitting = false);
     }
   }
 
+
   String _formatTimestamp(DateTime timestamp) {
     final now = DateTime.now();
     final difference = now.difference(timestamp);
 
     if (difference.inDays > 365) {
-      return '${(difference.inDays / 365).floor()}y ago';
+      return '${(difference.inDays / 365).floor()}${S.of(context).yearsAgo}';
     } else if (difference.inDays > 30) {
-      return '${(difference.inDays / 30).floor()}mo ago';
+      return '${(difference.inDays / 30).floor()}${S.of(context).monthsAgo}';
     } else if (difference.inDays > 0) {
-      return '${difference.inDays}d ago';
+      return '${difference.inDays}${S.of(context).daysAgo}';
     } else if (difference.inHours > 0) {
-      return '${difference.inHours}h ago';
+      return '${difference.inHours}${S.of(context).hoursAgo}';
     } else if (difference.inMinutes > 0) {
-      return '${difference.inMinutes}m ago';
+      return '${difference.inMinutes}${S.of(context).minutesAgo}';
     } else {
-      return 'just now';
+      return S.of(context).recently;
     }
   }
+
 
   Widget _buildRatingStars(double rating, {
     bool interactive = false,
@@ -383,8 +381,8 @@ class _RatingSectionState extends State<RatingSection> {
                         ),
 
                         // Title
-                        const Text(
-                          'Rate this house',
+                        Text(
+                          S.of(context).rateThisHouse,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -401,7 +399,6 @@ class _RatingSectionState extends State<RatingSection> {
                               setSheetState(() {
                                 tempRating = rating;
                               });
-                              // Also update the parent widget's state
                               setState(() {
                                 _userRating = rating;
                               });
@@ -415,7 +412,7 @@ class _RatingSectionState extends State<RatingSection> {
                           controller: _commentController,
                           style: theme.textTheme.bodyMedium,
                           decoration: InputDecoration(
-                            hintText: 'Add a comment (optional)',
+                            hintText: S.of(context).addCommentOptional,
                             hintStyle: theme.textTheme.bodyMedium,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -453,8 +450,8 @@ class _RatingSectionState extends State<RatingSection> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
-                                child: const Text(
-                                    'Cancel', style: TextStyle(fontSize: 16)),
+                                child: Text(
+                                    S.of(context).cancel, style: TextStyle(fontSize: 16)),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -505,7 +502,7 @@ class _RatingSectionState extends State<RatingSection> {
                                   child: CircularProgressIndicator(
                                       strokeWidth: 2),
                                 )
-                                    : const Text('Submit'),
+                                    : Text(S.of(context).submit),
                               ),
                             ),
                           ],

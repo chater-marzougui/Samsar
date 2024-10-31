@@ -29,7 +29,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
       final theme = Theme.of(context);
       return AlertDialog(
         title: Text(
-          'Filters',
+          S.of(context).filters,
           textAlign: TextAlign.center,
           style: theme.textTheme.bodyLarge,
         ),
@@ -44,7 +44,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                     children: [
                       Column(
                         children: [
-                          Text('For Rent', style: theme.textTheme.titleMedium),
+                          Text(S.of(context).forRent, style: theme.textTheme.titleMedium),
                           Checkbox(
                             value: tempIsForRent,
                             onChanged: (bool? value) {
@@ -58,7 +58,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                       ),
                       Column(
                         children: [
-                          Text('For Sale', style: theme.textTheme.titleMedium),
+                          Text(S.of(context).forSale, style: theme.textTheme.titleMedium),
                           Checkbox(
                             value: tempIsForSale,
                             onChanged: (bool? value) {
@@ -77,7 +77,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                   if (tempIsForRent) ...[
                     const SizedBox(height: 16),
                     Text(
-                      'Price Range: ${tempPriceRange.start.round()}DT - ${tempPriceRange.end.round()}DT',
+                      '${S.of(context).priceRange} : ${tempPriceRange.start.round()}DT - ${tempPriceRange.end.round()}DT',
                       style: theme.textTheme.bodySmall,
                     ),
                     RangeSlider(
@@ -106,7 +106,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                               focusNodeMin.unfocus();
                             },
                             decoration: InputDecoration(
-                              label: Text("Min Price", style: theme.textTheme.bodySmall),
+                              label: Text(S.of(context).minPrice, style: theme.textTheme.bodySmall),
                             ),
                             onChanged: (value) {
                               double minValue = double.tryParse(value) ?? 100;
@@ -129,7 +129,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                             },
                             style: theme.textTheme.bodyMedium,
                             decoration: InputDecoration(
-                              label: Text("Max Price", style: theme.textTheme.bodySmall),
+                              label: Text(S.of(context).maxPrice, style: theme.textTheme.bodySmall),
                             ),
                             onChanged: (value) {
                               double maxValue = double.tryParse(value) ?? 10000;
@@ -146,7 +146,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
 
                   // Rest of the filters...
                   const SizedBox(height: 16),
-                  Text('Area: ${tempSizeRange.start.round()} m² - ${tempSizeRange.end.round()} m²',
+                  Text('${S.of(context).area}: ${tempSizeRange.start.round()} m² - ${tempSizeRange.end.round()} m²',
                       style: theme.textTheme.titleSmall),
                   RangeSlider(
                     values: tempSizeRange,
@@ -160,7 +160,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                     },
                   ),
                   Text(
-                      'Rooms: ${tempBedroomsRange.start.round()} - ${tempBedroomsRange.end.round()}',
+                      '${S.of(context).bedrooms}: ${tempBedroomsRange.start.round()} - ${tempBedroomsRange.end.round()}',
                       style: theme.textTheme.titleSmall),
                   RangeSlider(
                     values: tempBedroomsRange,
@@ -175,7 +175,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                   ),
                   // Floor Filter
                   Text(
-                      'Floor: ${tempFloorRange.start.round()} - ${tempFloorRange.end.round()}',
+                      '${S.of(context).floor}: ${tempFloorRange.start.round()} - ${tempFloorRange.end.round()}',
                       style: theme.textTheme.titleSmall),
                   RangeSlider(
                     values: tempFloorRange,
@@ -200,7 +200,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                               value: tempSelectedRegion.isNotEmpty
                                   ? tempSelectedRegion
                                   : null,
-                              hint: Text("Select Region",
+                              hint: Text(S.of(context).selectRegion,
                                   style: theme.textTheme.titleMedium),
                               items: regionsAndDistricts.keys
                                   .map((String region) {
@@ -242,7 +242,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                                 value: tempSelectedDistrict.isNotEmpty
                                     ? tempSelectedDistrict
                                     : null,
-                                hint: Text("Select District",
+                                hint: Text(S.of(context).selectDistrict,
                                     style: theme.textTheme.titleMedium),
                                 items:
                                 regionsAndDistricts[tempSelectedRegion]!
@@ -275,9 +275,8 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                         ),
                     ],
                   ),
-
                   CheckboxListTile(
-                    title: Text('Has Parking',
+                    title: Text(S.of(context).hasParking,
                         style: theme.textTheme.titleMedium),
                     value: tempHasParking,
                     onChanged: (bool? value) {
@@ -287,7 +286,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                     },
                   ),
                   CheckboxListTile(
-                    title: Text('Is Furnished',
+                    title: Text(S.of(context).isFurnished,
                         style: theme.textTheme.titleMedium),
                     value: tempIsFurnished,
                     onChanged: (bool? value) {
@@ -297,7 +296,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                     },
                   ),
                   CheckboxListTile(
-                    title: Text('3D View Available',
+                    title: Text(S.of(context).has3DView,
                         style: theme.textTheme.titleMedium),
                     value: tempIs3D,
                     onChanged: (bool? value) {
@@ -309,13 +308,13 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Payment :', style: theme.textTheme.bodyLarge),
+                      Text('${S.of(context).payment} :', style: theme.textTheme.bodyLarge),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Text('Monthly',
+                              Text(S.of(context).monthly,
                                   style: theme.textTheme.bodyMedium),
                               Checkbox(
                                 value: tempIsMonthlyPayment,
@@ -329,7 +328,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
                           ),
                           Row(
                             children: [
-                              Text('Daily',
+                              Text(S.of(context).daily,
                                   style: theme.textTheme.bodyMedium),
                               Checkbox(
                                 value: tempIsDailyPayment,
@@ -355,7 +354,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
             onPressed: () {
               Navigator.of(context).pop(null);
             },
-            child: const Text('Cancel'),
+            child: Text(S.of(context).cancel),
           ),
           TextButton(
             onPressed: () {
@@ -376,7 +375,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
               };
               Navigator.of(context).pop(resetFilters);
             },
-            child: const Text('Reset'),
+            child: Text(S.of(context).reset),
           ),
           TextButton(
             onPressed: () {
@@ -397,7 +396,7 @@ Future<Map<String, dynamic>?> showFilterDialog(BuildContext context) async {
               };
               Navigator.of(context).pop(appliedFilters);
             },
-            child: const Text('Apply'),
+            child: Text(S.of(context).apply),
           ),
         ],
       );

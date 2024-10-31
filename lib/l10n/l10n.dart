@@ -130,6 +130,16 @@ class S {
     );
   }
 
+  /// `Not Available`
+  String get notAvailable {
+    return Intl.message(
+      'Not Available',
+      name: 'notAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enable this if your house is available`
   String get availableHint {
     return Intl.message(
@@ -960,10 +970,10 @@ class S {
     );
   }
 
-  /// `Favourite Houses`
+  /// `Favorite Houses`
   String get favouriteHouses {
     return Intl.message(
-      'Favourite Houses',
+      'Favorite Houses',
       name: 'favouriteHouses',
       desc: '',
       args: [],
@@ -1485,6 +1495,596 @@ class S {
     return Intl.message(
       'Select your phone code',
       name: 'selectYourPhoneCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have any houses listed.`
+  String get noHousesListed {
+    return Intl.message(
+      'You don\'t have any houses listed.',
+      name: 'noHousesListed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `in`
+  String get dans {
+    return Intl.message(
+      'in',
+      name: 'dans',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` {e} years ago`
+  String year(Object e) {
+    return Intl.message(
+      ' $e years ago',
+      name: 'year',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// ` {e} months ago`
+  String month(Object e) {
+    return Intl.message(
+      ' $e months ago',
+      name: 'month',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// ` {e} days ago`
+  String day(Object e) {
+    return Intl.message(
+      ' $e days ago',
+      name: 'day',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// ` {e} hours ago`
+  String hour(Object e) {
+    return Intl.message(
+      ' $e hours ago',
+      name: 'hour',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// `Recently`
+  String get recently {
+    return Intl.message(
+      'Recently',
+      name: 'recently',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme Mode`
+  String get themeMode {
+    return Intl.message(
+      'Theme Mode',
+      name: 'themeMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current`
+  String get justCurrent {
+    return Intl.message(
+      'Current',
+      name: 'justCurrent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable Notifications`
+  String get enableNotifications {
+    return Intl.message(
+      'Enable Notifications',
+      name: 'enableNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message(
+      'Light',
+      name: 'light',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `recenter`
+  String get recenter {
+    return Intl.message(
+      'recenter',
+      name: 'recenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Information`
+  String get additionalInformation {
+    return Intl.message(
+      'Additional Information',
+      name: 'additionalInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Gender`
+  String get selectGender {
+    return Intl.message(
+      'Select Gender',
+      name: 'selectGender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get genderMale {
+    return Intl.message(
+      'Male',
+      name: 'genderMale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get genderFemale {
+    return Intl.message(
+      'Female',
+      name: 'genderFemale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get genderOther {
+    return Intl.message(
+      'Other',
+      name: 'genderOther',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Birthdate`
+  String get selectBirthdate {
+    return Intl.message(
+      'Select Birthdate',
+      name: 'selectBirthdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid phone number`
+  String get validPhoneNumberRequired {
+    return Intl.message(
+      'Please enter a valid phone number',
+      name: 'validPhoneNumberRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filters`
+  String get filters {
+    return Intl.message(
+      'Filters',
+      name: 'filters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price Range`
+  String get priceRange {
+    return Intl.message(
+      'Price Range',
+      name: 'priceRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Min Price`
+  String get minPrice {
+    return Intl.message(
+      'Min Price',
+      name: 'minPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max Price`
+  String get maxPrice {
+    return Intl.message(
+      'Max Price',
+      name: 'maxPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Region`
+  String get selectRegion {
+    return Intl.message(
+      'Select Region',
+      name: 'selectRegion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select District`
+  String get selectDistrict {
+    return Intl.message(
+      'Select District',
+      name: 'selectDistrict',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3D View Available`
+  String get has3DView {
+    return Intl.message(
+      '3D View Available',
+      name: 'has3DView',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment`
+  String get payment {
+    return Intl.message(
+      'Payment',
+      name: 'payment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly`
+  String get monthly {
+    return Intl.message(
+      'Monthly',
+      name: 'monthly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily`
+  String get daily {
+    return Intl.message(
+      'Daily',
+      name: 'daily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dismiss`
+  String get dismiss {
+    return Intl.message(
+      'Dismiss',
+      name: 'dismiss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter {e}`
+  String pleaseEnter(Object e) {
+    return Intl.message(
+      'Please enter $e',
+      name: 'pleaseEnter',
+      desc: '',
+      args: [e],
+    );
+  }
+
+  /// `Please enter a phone number`
+  String get pleaseEnterPhoneNumber {
+    return Intl.message(
+      'Please enter a phone number',
+      name: 'pleaseEnterPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid phone number`
+  String get pleaseEnterValidPhoneNumber {
+    return Intl.message(
+      'Please enter a valid phone number',
+      name: 'pleaseEnterValidPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More Details`
+  String get moreDetails {
+    return Intl.message(
+      'More Details',
+      name: 'moreDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `uh-oh!\nPage not found`
+  String get uhOhPageNotFound {
+    return Intl.message(
+      'uh-oh!\nPage not found',
+      name: 'uhOhPageNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rating`
+  String get rating {
+    return Intl.message(
+      'Rating',
+      name: 'rating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Rate`
+  String get changeRating {
+    return Intl.message(
+      'Change Rate',
+      name: 'changeRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate`
+  String get rate {
+    return Intl.message(
+      'Rate',
+      name: 'rate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No ratings yet`
+  String get noRatings {
+    return Intl.message(
+      'No ratings yet',
+      name: 'noRatings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `rating`
+  String get ratingSingle {
+    return Intl.message(
+      'rating',
+      name: 'ratingSingle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ratings`
+  String get ratingMultiple {
+    return Intl.message(
+      'ratings',
+      name: 'ratingMultiple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Rating`
+  String get deleteRating {
+    return Intl.message(
+      'Delete Rating',
+      name: 'deleteRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete your rating?`
+  String get deleteRatingConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete your rating?',
+      name: 'deleteRatingConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a rating`
+  String get selectRating {
+    return Intl.message(
+      'Please select a rating',
+      name: 'selectRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rating submitted successfully`
+  String get ratingSubmitted {
+    return Intl.message(
+      'Rating submitted successfully',
+      name: 'ratingSubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error submitting rating, try again later`
+  String get errorSubmittingRating {
+    return Intl.message(
+      'Error submitting rating, try again later',
+      name: 'errorSubmittingRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rating deleted successfully`
+  String get ratingDeleted {
+    return Intl.message(
+      'Rating deleted successfully',
+      name: 'ratingDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting rating`
+  String get errorDeletingRating {
+    return Intl.message(
+      'Error deleting rating',
+      name: 'errorDeletingRating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate this house`
+  String get rateThisHouse {
+    return Intl.message(
+      'Rate this house',
+      name: 'rateThisHouse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a comment (optional)`
+  String get addCommentOptional {
+    return Intl.message(
+      'Add a comment (optional)',
+      name: 'addCommentOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `y ago`
+  String get yearsAgo {
+    return Intl.message(
+      'y ago',
+      name: 'yearsAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `mo ago`
+  String get monthsAgo {
+    return Intl.message(
+      'mo ago',
+      name: 'monthsAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `d ago`
+  String get daysAgo {
+    return Intl.message(
+      'd ago',
+      name: 'daysAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `h ago`
+  String get hoursAgo {
+    return Intl.message(
+      'h ago',
+      name: 'hoursAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `m ago`
+  String get minutesAgo {
+    return Intl.message(
+      'm ago',
+      name: 'minutesAgo',
       desc: '',
       args: [],
     );

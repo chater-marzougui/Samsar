@@ -1,2 +1,14 @@
 ({String comment, String displayName, String imageUrl, double rate, FieldValue timestamp})
 ({String comment, String displayName, String imageUrl, double rate, Timestamp timestamp})
+
+"filters": "Filters",
+"priceRange": "Price Range",
+"minPrice": "Min Price",
+"maxPrice": "Max Price",
+"selectRegion": "Select Region",
+"selectDistrict": "Select District",
+"has3DView": "3D View Available",
+"payment": "Payment",
+"monthly": "Monthly",
+"daily": "Daily",
+"reset": "Reset"

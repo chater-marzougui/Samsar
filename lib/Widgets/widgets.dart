@@ -6,6 +6,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import '../helpers/CachedTileProvider.dart';
 import '../helpers/user_manager.dart';
+import '../l10n/l10n.dart';
 import '../values/structures.dart';
 import '../helpers/house_manager.dart';
 
@@ -118,62 +119,7 @@ Widget buildInfoDoc(
     ),
   );
 }
-/*
-Widget buildRatingCard(BuildContext context, int rating, int numRaters) {
-  final theme = Theme.of(context);
-  double averageRating = numRaters == 0 ? 0 : rating / numRaters;
 
-  return Card(
-    elevation: 4,
-    color: theme.cardColor,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    child: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Icon(Icons.star_rate_outlined,
-                  size: 24, color: theme.iconTheme.color),
-              const SizedBox(width: 8),
-              Text(
-                "Rating",
-                style: theme.textTheme.titleLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(5, (index) {
-              return Icon(
-                index < averageRating.round() ? Icons.star : Icons.star_border,
-                size: 42,
-                color: index < averageRating.round()
-                    ? Colors.amber
-                    : theme.disabledColor,
-              );
-            }),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            averageRating == 0
-                ? 'No ratings'
-                : '${averageRating.toStringAsFixed(1)}/5',
-            style: theme.textTheme.titleMedium,
-          ),
-          const SizedBox(width: 4),
-          Text(
-            '($numRaters ratings)',
-            style: theme.textTheme.labelMedium,
-          ),
-        ],
-      ),
-    ),
-  );
-}
-*/
 Widget buildSection(
     BuildContext context, IconData icon, String title, List<String> items) {
   final theme = Theme.of(context);
@@ -258,7 +204,7 @@ Widget buildTextField(
     validator: validator ??
         (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter $label';
+            return S.of(context).pleaseEnter(label);
           }
           return null;
         },
@@ -315,14 +261,14 @@ Widget buildPhoneNumberField(
     controller: phoneNumberController,
     validator: (value) {
       if (value == null || value.isEmpty) {
-        return 'Please enter a phone number';
+        return S().pleaseEnterPhoneNumber;
       } else if (value.length < 6) {
-        return 'Please enter a valid phone number';
+        return S().pleaseEnterValidPhoneNumber;
       }
       return null;
     },
     decoration: InputDecoration(
-      labelText: 'Phone Number',
+      labelText: S().phoneNumber,
       border: OutlineInputBorder(),
       prefix: IconButton(
         icon: CountryPickerUtils.getDefaultFlagImage(country),
@@ -351,7 +297,7 @@ class HousePreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String rooms = house.specs.hasLivingRoom ? "S+${house.specs.rooms}" : "${house.specs.rooms} rooms";
+    final String rooms = house.specs.hasLivingRoom ? "S+${house.specs.rooms}" : "${house.specs.rooms} ${S.of(context).bedrooms}";
     return Card(
       elevation: 4,
       margin: const EdgeInsets.only(top: 0,bottom: 12, right: 12, left: 12),
@@ -392,7 +338,7 @@ class HousePreviewWidget extends StatelessWidget {
                         size: 28,
                       ),
                       Text(
-                        "  :${(distance / 1000).toStringAsFixed(1)}Km ",
+                        "${S.of(context).distance} :${(distance / 1000).toStringAsFixed(1)}Km ",
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.red,
                         ),
@@ -442,7 +388,7 @@ class HousePreviewWidget extends StatelessWidget {
                   onPressed: onTap,
                   style: Theme.of(context).elevatedButtonTheme.style,
                   child: Text(
-                    'View Details',
+                    S.of(context).moreDetails,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
@@ -461,7 +407,7 @@ class CustomLoadingScreen extends StatelessWidget {
 
   const CustomLoadingScreen({
     super.key,
-    this.message = "Please wait...",
+    this.message = "...",
     this.indicatorColor = Colors.blue,
   });
 

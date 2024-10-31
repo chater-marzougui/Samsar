@@ -45,13 +45,11 @@ class _SlideTransitionSnackBarState extends State<SlideTransitionSnackBar>
   void initState() {
     super.initState();
 
-    // Initialize animation controller
     _controller = AnimationController(
       duration: const Duration(milliseconds: 700),
       vsync: this,
     );
 
-    // Define the slide transition from top to bottom
     _offsetAnimation = Tween<Offset>(
       begin: const Offset(0.0, -2.0),
       end: Offset.zero,
@@ -60,7 +58,6 @@ class _SlideTransitionSnackBarState extends State<SlideTransitionSnackBar>
       curve: Curves.easeInOut,
     ));
 
-    // Start the animation
     _controller.forward();
   }
 
@@ -75,11 +72,11 @@ class _SlideTransitionSnackBarState extends State<SlideTransitionSnackBar>
     return SlideTransition(
       position: _offsetAnimation,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24), // Reduces width on both sides
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Material(
           color: Colors.blue,
           elevation: 10.0,
-          borderRadius: BorderRadius.circular(12), // Increased border radius for rounded corners
+          borderRadius: BorderRadius.circular(12),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -95,8 +92,8 @@ class _SlideTransitionSnackBarState extends State<SlideTransitionSnackBar>
                   onPressed: () {
                     _controller.reverse();
                   },
-                  child: const Text(
-                    'Dismiss',
+                  child: Text(
+                    S.of(context).dismiss,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

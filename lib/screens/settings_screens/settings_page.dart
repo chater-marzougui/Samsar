@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../l10n/l10n.dart';
 import '../../main.dart';
 import '../../values/app_preferences.dart';
 
@@ -75,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(S.of(context).settings),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -94,12 +95,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 items: [
                   DropdownMenuItem(value: 'en', child: Text('English')),
                   DropdownMenuItem(value: 'fr', child: Text('French')),
-                  DropdownMenuItem(value: 'ar', child: Text('Arabic')),
+                  DropdownMenuItem(value: 'ar', child: Text('العربية')),
                 ],
               ),
               ListTile(
-                title: const Text('Theme Mode'),
-                subtitle: Text('Current: $_selectedThemeMode'),
+                title: Text(S.of(context).themeMode), // Localized 'Theme Mode'
+                subtitle: Text('${S.of(context).justCurrent}: $_selectedThemeMode'), // Localized 'Current:'
                 trailing: DropdownButton<String>(
                   value: _selectedThemeMode,
                   onChanged: (String? newValue) {
@@ -110,18 +111,19 @@ class _SettingsPageState extends State<SettingsPage> {
                   items: <String>['light', 'dark'].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(value), // Localized theme mode options
                     );
                   }).toList(),
                 ),
               ),
               SwitchListTile(
-                title: const Text('Enable Notifications'),
+                title: Text(S.of(context).enableNotifications), // Localized 'Enable Notifications'
                 value: _notificationsEnabled,
                 onChanged: (bool newValue) {
                   _toggleNotifications(newValue);
                 },
               ),
+
             ],
           ),
           if (_isUpdating)

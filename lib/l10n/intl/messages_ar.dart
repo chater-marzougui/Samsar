@@ -8,7 +8,6 @@
 // ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
 // ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
 // ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
-// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
@@ -20,29 +19,41 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(error) => "خطأ في التحقق من حالة المفضلة: ${error}";
+  static String m0(e) => "منذ ${e} أيام";
 
-  static String m1(e) => "خطأ في تحميل بيانات المستخدم: ${e}";
+  static String m1(error) => "خطأ في التحقق من حالة المفضلة: ${error}";
 
-  static String m2(error) => "خطأ في إرسال بريد استرداد كلمة المرور: ${error}";
+  static String m2(e) => "خطأ في تحميل بيانات المستخدم: ${e}";
 
-  static String m3(e) => "خطأ في تسجيل الخروج: ${e}";
+  static String m3(error) => "خطأ في إرسال بريد استرداد كلمة المرور: ${error}";
 
-  static String m4(error) => "خطأ في تحديث حالة المفضلة: ${error}";
+  static String m4(e) => "خطأ في تسجيل الخروج: ${e}";
 
-  static String m5(error) => "خطأ في تحديث كلمة المرور: ${error}";
+  static String m5(error) => "خطأ في تحديث حالة المفضلة: ${error}";
 
-  static String m6(e) => "حقل ${e} مطلوب";
+  static String m6(error) => "خطأ في تحديث كلمة المرور: ${error}";
 
-  static String m7(e) => "أقصى مسافة: ${e} كم";
+  static String m7(e) => "حقل ${e} مطلوب";
 
-  static String m8(name) => "منزل ${name}";
+  static String m8(e) => "منذ ${e} ساعات";
 
-  static String m9(price) => "${price} د.ت";
+  static String m9(e) => "أقصى مسافة: ${e} كم";
+
+  static String m10(e) => "منذ ${e} أشهر";
+
+  static String m11(name) => "منزل ${name}";
+
+  static String m12(e) => "${e} يرجى إدخال";
+
+  static String m13(price) => "${price} د.ت";
+
+  static String m14(e) => "منذ ${e} سنوات";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("إضافة"),
+        "addCommentOptional":
+            MessageLookupByLibrary.simpleMessage("أضف تعليقًا (اختياريًا)"),
         "addFeature": MessageLookupByLibrary.simpleMessage("إضافة ميزة"),
         "addFeatures": MessageLookupByLibrary.simpleMessage("إضافة ميزات"),
         "addFurniture": MessageLookupByLibrary.simpleMessage("إضافة أثاث"),
@@ -51,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addedToFavorites":
             MessageLookupByLibrary.simpleMessage("تمت إضافته إلى المفضلة"),
         "additionalImages": MessageLookupByLibrary.simpleMessage("صور إضافية"),
+        "additionalInformation":
+            MessageLookupByLibrary.simpleMessage("معلومات إضافية"),
         "address": MessageLookupByLibrary.simpleMessage("العنوان"),
         "adjustSearchOrFilters":
             MessageLookupByLibrary.simpleMessage("حاول تعديل البحث أو الفلاتر"),
@@ -68,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bedrooms": MessageLookupByLibrary.simpleMessage("غرف النوم"),
         "camera": MessageLookupByLibrary.simpleMessage("كاميرا"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "changeRating": MessageLookupByLibrary.simpleMessage("تغيير التقييم"),
         "changeToAnotherLoc":
             MessageLookupByLibrary.simpleMessage("التغيير إلى مكان آخر"),
         "chooseAnImageSource":
@@ -79,16 +93,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactSupport": MessageLookupByLibrary.simpleMessage("اتصل بالدعم"),
         "contactUsDirectly":
             MessageLookupByLibrary.simpleMessage("أو اتصل بنا مباشرة"),
+        "daily": MessageLookupByLibrary.simpleMessage("يومي"),
         "dailyPayment": MessageLookupByLibrary.simpleMessage("الدفع اليومي"),
+        "dans": MessageLookupByLibrary.simpleMessage("في"),
+        "dark": MessageLookupByLibrary.simpleMessage("داكن"),
+        "day": m0,
+        "daysAgo": MessageLookupByLibrary.simpleMessage("ي"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
         "deleteHouse": MessageLookupByLibrary.simpleMessage("حذف المنزل"),
         "deleteHouseConfirmation": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد حذف هذا المنزل؟"),
+        "deleteRating": MessageLookupByLibrary.simpleMessage("حذف التقييم"),
+        "deleteRatingConfirmation": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف التقييم الخاص بك؟"),
         "describeIssue": MessageLookupByLibrary.simpleMessage("وصف مشكلتك"),
+        "dismiss": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "distance": MessageLookupByLibrary.simpleMessage("المسافة"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "enableNotifications":
+            MessageLookupByLibrary.simpleMessage("تفعيل الإشعارات"),
         "enterEmail":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
         "enterName": MessageLookupByLibrary.simpleMessage("أدخل اسمك"),
@@ -99,18 +124,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterSubject": MessageLookupByLibrary.simpleMessage("أدخل الموضوع"),
         "enterYourEmailToRecoverPassword": MessageLookupByLibrary.simpleMessage(
             "أدخل بريدك الإلكتروني لاستعادة كلمة المرور الخاصة بك"),
-        "errorCheckingFavoriteStatus": m0,
+        "errorCheckingFavoriteStatus": m1,
         "errorDeletingHouse":
             MessageLookupByLibrary.simpleMessage("خطأ في حذف المنزل"),
+        "errorDeletingRating":
+            MessageLookupByLibrary.simpleMessage("خطأ في حذف التقييم"),
         "errorFetchingHouses":
             MessageLookupByLibrary.simpleMessage("خطأ في جلب البيانات"),
-        "errorLoadingUserData": m1,
+        "errorLoadingUserData": m2,
         "errorSearchingForPlaces":
             MessageLookupByLibrary.simpleMessage("خطأ في البحث عن الأماكن"),
-        "errorSendingPasswordRecoveryEmail": m2,
-        "errorSigningOut": m3,
-        "errorUpdatingFavoriteStatus": m4,
-        "errorUpdatingPassword": m5,
+        "errorSendingPasswordRecoveryEmail": m3,
+        "errorSigningOut": m4,
+        "errorSubmittingRating": MessageLookupByLibrary.simpleMessage(
+            "خطأ في إرسال التقييم، حاول مرة أخرى لاحقًا"),
+        "errorUpdatingFavoriteStatus": m5,
+        "errorUpdatingPassword": m6,
         "errorUpdatingProfile":
             MessageLookupByLibrary.simpleMessage("خطأ في تحديث الملف الشخصي"),
         "errorUploadingHouse":
@@ -119,7 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("فشل في تحميل نتائج البحث"),
         "favouriteHouses":
             MessageLookupByLibrary.simpleMessage("المنازل المفضلة"),
-        "fieldRequired": m6,
+        "fieldRequired": m7,
+        "filters": MessageLookupByLibrary.simpleMessage("الفلاتر"),
         "floor": MessageLookupByLibrary.simpleMessage("الطابق"),
         "forRent": MessageLookupByLibrary.simpleMessage("للإيجار"),
         "forSale": MessageLookupByLibrary.simpleMessage("للبيع"),
@@ -132,7 +162,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "gallery": MessageLookupByLibrary.simpleMessage("معرض"),
         "garageFeatures":
             MessageLookupByLibrary.simpleMessage("كراج، 2 غرفة، 2 مرحاض..."),
+        "genderFemale": MessageLookupByLibrary.simpleMessage("أنثى"),
+        "genderMale": MessageLookupByLibrary.simpleMessage("ذكر"),
+        "genderOther": MessageLookupByLibrary.simpleMessage("آخر"),
         "groundFloor": MessageLookupByLibrary.simpleMessage("0 للطابق الأرضي"),
+        "has3DView":
+            MessageLookupByLibrary.simpleMessage("عرض ثلاثي الأبعاد متاح"),
         "hasLivingRoom": MessageLookupByLibrary.simpleMessage(
             "المنزل هل يوجد به غرفة معيشة ؟"),
         "hasParking": MessageLookupByLibrary.simpleMessage(
@@ -141,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hintText":
             MessageLookupByLibrary.simpleMessage("فيلا ، شقة ، استوديو ..."),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "hour": m8,
+        "hoursAgo": MessageLookupByLibrary.simpleMessage("س"),
         "houseDeleteSuccess":
             MessageLookupByLibrary.simpleMessage("تم حذف المنزل بنجاح"),
         "houseSpecifications":
@@ -153,8 +190,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "isAvailable": MessageLookupByLibrary.simpleMessage("متوفر"),
         "isFurnished": MessageLookupByLibrary.simpleMessage("هل هو مؤثث؟"),
         "justContinue": MessageLookupByLibrary.simpleMessage("متابعة"),
+        "justCurrent": MessageLookupByLibrary.simpleMessage("الحالي"),
         "justIn": MessageLookupByLibrary.simpleMessage("en"),
         "lastName": MessageLookupByLibrary.simpleMessage("اللقب"),
+        "light": MessageLookupByLibrary.simpleMessage("فاتح"),
         "livingRoom": MessageLookupByLibrary.simpleMessage("غرفة المعيشة"),
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -162,11 +201,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "هل أنت متأكد أنك تريد تسجيل الخروج؟"),
         "main": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "mainImage": MessageLookupByLibrary.simpleMessage("الصورة الرئيسية"),
-        "maxDistance": m7,
+        "maxDistance": m9,
+        "maxPrice": MessageLookupByLibrary.simpleMessage("السعر الأقصى"),
         "message": MessageLookupByLibrary.simpleMessage("الرسالة"),
         "middleName":
             MessageLookupByLibrary.simpleMessage("الاسم الأوسط (اختياري)"),
+        "minPrice": MessageLookupByLibrary.simpleMessage("السعر الأدنى"),
+        "minutesAgo": MessageLookupByLibrary.simpleMessage("د"),
+        "month": m10,
+        "monthly": MessageLookupByLibrary.simpleMessage("شهري"),
         "monthlyPayment": MessageLookupByLibrary.simpleMessage("الدفع الشهري"),
+        "monthsAgo": MessageLookupByLibrary.simpleMessage("ش"),
+        "moreDetails":
+            MessageLookupByLibrary.simpleMessage("المزيد من التفاصيل"),
         "myHouses": MessageLookupByLibrary.simpleMessage("منازلي"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "newPassword":
@@ -174,18 +221,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noAdditionalImages":
             MessageLookupByLibrary.simpleMessage("لا توجد صور إضافية مختارة"),
+        "noHousesListed": MessageLookupByLibrary.simpleMessage(
+            "لا توجد لديك أي منازل مدرجة."),
         "noMoreHousesFound": MessageLookupByLibrary.simpleMessage(
             "لم يتم العثور على المزيد من المنازل"),
+        "noRatings": MessageLookupByLibrary.simpleMessage("لا توجد تقييمات"),
         "noResultsFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على نتائج"),
         "noRooms": MessageLookupByLibrary.simpleMessage("0 إذا لم توجد غرف"),
+        "notAvailable": MessageLookupByLibrary.simpleMessage("غير متاح"),
         "notLoggedIn":
             MessageLookupByLibrary.simpleMessage("لم يتم تسجيل الدخول..."),
         "oldPassword":
             MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
         "options": MessageLookupByLibrary.simpleMessage("الخيارات"),
         "ownerComment": MessageLookupByLibrary.simpleMessage("تعليق المالك"),
-        "ownerHouse": m8,
+        "ownerHouse": m11,
         "ownerInfoMessage": MessageLookupByLibrary.simpleMessage(
             "سيتم ملء معلومات المالك تلقائيًا بناءً على تفاصيل حسابك."),
         "ownerInformation":
@@ -198,26 +249,54 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تم تحديث كلمة المرور بنجاح"),
         "passwordsDoNotMatch":
             MessageLookupByLibrary.simpleMessage("كلمات المرور لا تتطابق"),
+        "payment": MessageLookupByLibrary.simpleMessage("الدفع"),
         "personalAccount":
             MessageLookupByLibrary.simpleMessage("الحساب الشخصي"),
         "phone": MessageLookupByLibrary.simpleMessage("الهاتف"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "phoneUpdateSuccess":
             MessageLookupByLibrary.simpleMessage("تم تحديث رقم الهاتف بنجاح"),
         "pickCustomLocation":
             MessageLookupByLibrary.simpleMessage("اختيار موقع مخصص"),
+        "pleaseEnter": m12,
+        "pleaseEnterPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال رقم الهاتف"),
+        "pleaseEnterValidPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال رقم هاتف صالح"),
         "price": MessageLookupByLibrary.simpleMessage("السعر"),
-        "priceValue": m9,
+        "priceRange": MessageLookupByLibrary.simpleMessage("نطاق السعر"),
+        "priceValue": m13,
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "profileUpdatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم تحديث الملف الشخصي بنجاح"),
+        "rate": MessageLookupByLibrary.simpleMessage("قيّم"),
+        "rateThisHouse": MessageLookupByLibrary.simpleMessage("قيم هذا المنزل"),
+        "rating": MessageLookupByLibrary.simpleMessage("التقييم"),
+        "ratingDeleted":
+            MessageLookupByLibrary.simpleMessage("تم حذف التقييم بنجاح"),
+        "ratingMultiple": MessageLookupByLibrary.simpleMessage("تقييمات"),
+        "ratingSingle": MessageLookupByLibrary.simpleMessage("تقييم"),
+        "ratingSubmitted":
+            MessageLookupByLibrary.simpleMessage("تم إرسال التقييم بنجاح"),
+        "recenter": MessageLookupByLibrary.simpleMessage("إعادة ضبط"),
+        "recently": MessageLookupByLibrary.simpleMessage("الآن"),
         "removedFromFavorites":
             MessageLookupByLibrary.simpleMessage("تمت إزالته من المفضلة"),
         "rentPrice": MessageLookupByLibrary.simpleMessage("سعر الإيجار"),
+        "reset": MessageLookupByLibrary.simpleMessage("إعادة تعيين"),
+        "reviews": MessageLookupByLibrary.simpleMessage("التقييمات"),
         "salePrice": MessageLookupByLibrary.simpleMessage("سعر البيع"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "selectBirthdate":
+            MessageLookupByLibrary.simpleMessage("اختر تاريخ الميلاد"),
+        "selectDistrict": MessageLookupByLibrary.simpleMessage("اختر الحي"),
+        "selectGender": MessageLookupByLibrary.simpleMessage("اختر الجنس"),
         "selectImageSource":
             MessageLookupByLibrary.simpleMessage("اختر مصدر الصورة"),
+        "selectRating":
+            MessageLookupByLibrary.simpleMessage("يرجى تحديد التقييم"),
+        "selectRegion": MessageLookupByLibrary.simpleMessage("اختر المنطقة"),
         "selectYourPhoneCode":
             MessageLookupByLibrary.simpleMessage("اختر رمز هاتفك"),
         "sendRecoveryEmail":
@@ -232,9 +311,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "فشل في إرسال طلب الدعم. الرجاء المحاولة مرة أخرى."),
         "supportRequestSent":
             MessageLookupByLibrary.simpleMessage("تم إرسال طلب الدعم بنجاح!"),
+        "themeMode": MessageLookupByLibrary.simpleMessage("وضع السمة"),
         "type": MessageLookupByLibrary.simpleMessage("النوع"),
         "typeYourPasswordToApplyChanges": MessageLookupByLibrary.simpleMessage(
             "اكتب كلمة المرور الخاصة بك لتطبيق التغييرات"),
+        "uhOhPageNotFound":
+            MessageLookupByLibrary.simpleMessage("!الصفحة غير موجودة"),
         "update": MessageLookupByLibrary.simpleMessage("تحديث"),
         "updateError": MessageLookupByLibrary.simpleMessage("خطأ"),
         "updateHouseDetails":
@@ -243,12 +325,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحميل منزل"),
         "useCurrentLocation":
             MessageLookupByLibrary.simpleMessage("استخدام الموقع الحالي"),
+        "validPhoneNumberRequired":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال رقم هاتف صالح"),
         "verificationCodeError":
             MessageLookupByLibrary.simpleMessage("خطأ في إرسال رمز التحقق"),
         "weReUploadingWait": MessageLookupByLibrary.simpleMessage(
             "...نحن نقوم بتحميل منزلك، يرجى الانتظار"),
         "wrongPassword":
             MessageLookupByLibrary.simpleMessage("كلمة مرور خاطئة"),
+        "year": m14,
+        "yearsAgo": MessageLookupByLibrary.simpleMessage("س"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم")
       };
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:samsar/values/app_routes.dart';
 import '../Widgets/widgets.dart';
+import '../l10n/l10n.dart';
 
 Future<void> showAdditionalInfoDialog(BuildContext context, String userId) async {
   String? gender;
@@ -20,29 +21,35 @@ Future<void> showAdditionalInfoDialog(BuildContext context, String userId) async
       return StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: Text('Additional Information'),
+            title: Text(S.of(context).additionalInformation), // Localized title
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  DropdownButton<String>(
-                    value: gender,
-                    hint: Text('Select Gender'),
-                    items: <String>['Male', 'Female', 'Other'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        gender = newValue;
-                      });
-                    },
-                  ),
+                DropdownButton<String>(
+                  value: gender,
+                      hint: Text(S.of(context).selectGender),
+                      items: <String>['Male', 'Female', 'Other'].map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                              value == 'Male'
+                                  ? S.of(context).genderMale
+                                  : value == 'Female'
+                                  ? S.of(context).genderFemale
+                                  : S.of(context).genderOther
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          gender = newValue;
+                        });
+                      },
+                    ),
                   SizedBox(height: 10),
                   ElevatedButton(
                     child: Text(birthdate == null
-                        ? 'Select Birthdate'
+                        ? S.of(context).selectBirthdate
                         : DateFormat('yyyy-MM-dd').format(birthdate!)),
                     onPressed: () async {
                       final DateTime? picked = await showDatePicker(
@@ -59,20 +66,23 @@ Future<void> showAdditionalInfoDialog(BuildContext context, String userId) async
                     },
                   ),
                   SizedBox(height: 10),
-                  buildPhoneNumberField(phoneNumberController,
-                      selectedDialogCountry, () => _openCountryPickerDialog(context, setState, selectedDialogCountry)),
+                  buildPhoneNumberField(
+                    phoneNumberController,
+                    selectedDialogCountry,
+                        () => _openCountryPickerDialog(context, setState, selectedDialogCountry),
+                  ),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text('Save'),
+                child: Text(S.of(context).saveChanges),
                 onPressed: () async {
                   String phoneNumber = '+${selectedDialogCountry.phoneCode}${phoneNumberController.text}';
 
                   if (phoneNumberController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please enter a valid phone number')),
+                      SnackBar(content: Text(S.of(context).validPhoneNumberRequired)),
                     );
                     return;
                   }
@@ -100,10 +110,10 @@ void _openCountryPickerDialog(BuildContext context, StateSetter setState, Countr
     data: Theme.of(context),
     child: CountryPickerDialog(
       titlePadding: const EdgeInsets.all(8.0),
-      searchInputDecoration: const InputDecoration(hintText: 'Search...'),
+      searchInputDecoration: InputDecoration(hintText: '${S.of(context).search}...'),
       isSearchable: true,
-      title: const Text(
-        'Select your phone code',
+      title: Text(
+        S.of(context).selectYourPhoneCode,
         style: TextStyle(fontSize: 18),
       ),
       onValuePicked: (Country country) => setState(() => selectedDialogCountry = country),
