@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:samsar/Widgets/additional_info_dialog.dart';
 import 'package:samsar/helpers/user_manager.dart';
+import 'package:samsar/l10n/l10n.dart';
 import 'package:samsar/screens/main_screens/add_house.dart';
 import 'package:samsar/screens/main_screens/profile_screen.dart';
 import 'package:samsar/values/structures.dart';
@@ -71,16 +72,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<bool> onWillPop() async {
-    final now = DateTime.now();
-    if (lastPressed == null || now.difference(lastPressed!) > const Duration(seconds: 2)) {
-      lastPressed = now;
-      Fluttertoast.showToast(msg: 'Tap again to exit');
-      return false;
-    }
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -113,27 +104,27 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home, color: theme.colorScheme.tertiary),
               activeIcon: Icon(Icons.home, color: theme.primaryColor),
-              label: 'Home',
+              label: S.of(context).home,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search, color: theme.colorScheme.tertiary),
               activeIcon: Icon(Icons.search, color: theme.primaryColor),
-              label: 'Search',
+              label: S.of(context).search,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.add_home_work_outlined, color: theme.colorScheme.tertiary),
               activeIcon: Icon(Icons.add_home_work_outlined, color: theme.primaryColor),
-              label: 'Add',
+              label: S.of(context).add,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications, color: theme.colorScheme.tertiary),
               activeIcon: Icon(Icons.notifications, color: theme.primaryColor),
-              label: 'Inbox',
+              label: S.of(context).inbox,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person, color: theme.colorScheme.tertiary),
               activeIcon: Icon(Icons.person, color: theme.primaryColor),
-              label: 'Profile',
+              label: S.of(context).profile,
             ),
           ],
         ),

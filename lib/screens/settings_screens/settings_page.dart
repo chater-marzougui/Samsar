@@ -48,6 +48,9 @@ class _SettingsPageState extends State<SettingsPage> {
       _selectedLanguage = language;
       _isUpdating = false;
     });
+
+    // Update the app's locale
+    if(mounted) MyApp.of(context)?.setLocale(Locale(language));
   }
 
   Future<void> _updateThemeMode(String themeMode) async {
@@ -68,19 +71,6 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  Future<void> _toggleNotifications(bool isEnabled) async {
-    setState(() {
-      _isUpdating = true;
-    });
-
-    await appPreferences.setNotificationsEnabled(isEnabled);
-
-    setState(() {
-      _notificationsEnabled = isEnabled;
-      _isUpdating = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,26 +84,19 @@ class _SettingsPageState extends State<SettingsPage> {
           ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
-              ListTile(
-                title: const Text('Preferred Language'),
-                subtitle: Text('Current: $_selectedLanguage'),
-                trailing: DropdownButton<String>(
-                  value: _selectedLanguage,
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      _updateLanguage(newValue);
-                    }
-                  },
-                  items: <String>['ar', 'tn', 'fr', 'en']
-                      .map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value.toUpperCase()),
-                    );
-                  }).toList(),
-                ),
+              DropdownButton<String>(
+                value: _selectedLanguage,
+                onChanged: (String? newLocale) {
+                  if (newLocale != null) {
+                    _updateLanguage(newLocale);
+                  }
+                },
+                items: [
+                  DropdownMenuItem(value: 'en', child: Text('English')),
+                  DropdownMenuItem(value: 'fr', child: Text('French')),
+                  DropdownMenuItem(value: 'ar', child: Text('Arabic')),
+                ],
               ),
-
               ListTile(
                 title: const Text('Theme Mode'),
                 subtitle: Text('Current: $_selectedThemeMode'),
@@ -124,8 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       _updateThemeMode(newValue);
                     }
                   },
-                  items: <String>['light', 'dark']
-                      .map((String value) {
+                  items: <String>['light', 'dark'].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -133,7 +115,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   }).toList(),
                 ),
               ),
-
               SwitchListTile(
                 title: const Text('Enable Notifications'),
                 value: _notificationsEnabled,
@@ -150,5 +131,18 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
     );
+  }
+
+  Future<void> _toggleNotifications(bool isEnabled) async {
+    setState(() {
+      _isUpdating = true;
+    });
+
+    await appPreferences.setNotificationsEnabled(isEnabled);
+
+    setState(() {
+      _notificationsEnabled = isEnabled;
+      _isUpdating = false;
+    });
   }
 }

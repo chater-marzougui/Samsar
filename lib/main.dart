@@ -8,6 +8,7 @@ import 'package:samsar/screens/user_control/signup.dart';
 import 'package:samsar/values/app_preferences.dart';
 import 'package:samsar/values/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'l10n/l10n.dart';
 import 'firebase_options.dart';
 import 'routes.dart';
 
@@ -35,6 +36,13 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   ThemeMode _themeMode = ThemeMode.light;
+  Locale _locale = Locale('en');
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   void updateThemeMode(ThemeMode themeMode) {
     setState(() {
@@ -46,6 +54,14 @@ class MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _loadThemeMode();
+    _loadLocale();
+  }
+
+  Future<void> _loadLocale() async {
+    final savedLocale = widget.appPreferences.getPreferredLanguage(); // Assuming this method exists in AppPreferences
+    setState(() {
+      _locale = Locale(savedLocale);
+    });
   }
 
   Future<void> _loadThemeMode() async {
@@ -59,16 +75,24 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Samsar',
+      locale: _locale,
       localizationsDelegates: [
+        S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('en'),
-        Locale('fr'),
-        Locale('ar'),
+        Locale('en', 'EN'),
+        Locale('fr', 'FR'),
+        Locale('ar', 'AR'),
       ],
+      builder: (context, child) {
+        return Directionality(
+          textDirection: TextDirection.ltr,
+          child: child!,
+        );
+      },
       themeMode: _themeMode,
       theme: _lightTheme(),
       darkTheme: _darkTheme(),
