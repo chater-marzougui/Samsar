@@ -110,16 +110,6 @@ class S {
     );
   }
 
-  /// `Save Changes`
-  String get saveChanges {
-    return Intl.message(
-      'Save Changes',
-      name: 'saveChanges',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Available`
   String get available {
     return Intl.message(
@@ -150,66 +140,6 @@ class S {
     );
   }
 
-  /// `House Specifications`
-  String get houseSpecifications {
-    return Intl.message(
-      'House Specifications',
-      name: 'houseSpecifications',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Type`
-  String get type {
-    return Intl.message(
-      'Type',
-      name: 'type',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Living Room`
-  String get livingRoom {
-    return Intl.message(
-      'Living Room',
-      name: 'livingRoom',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Bedrooms`
-  String get bedrooms {
-    return Intl.message(
-      'Bedrooms',
-      name: 'bedrooms',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Floor`
-  String get floor {
-    return Intl.message(
-      'Floor',
-      name: 'floor',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Area`
-  String get area {
-    return Intl.message(
-      'Area',
-      name: 'area',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Location`
   String get location {
     return Intl.message(
@@ -225,16 +155,6 @@ class S {
     return Intl.message(
       'Address',
       name: 'address',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `City`
-  String get city {
-    return Intl.message(
-      'City',
-      name: 'city',
       desc: '',
       args: [],
     );
@@ -295,26 +215,6 @@ class S {
     return Intl.message(
       'Please enter a rent price',
       name: 'enterRentPrice',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Furnished`
-  String get furnished {
-    return Intl.message(
-      'Furnished',
-      name: 'furnished',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add Furniture`
-  String get addFurniture {
-    return Intl.message(
-      'Add Furniture',
-      name: 'addFurniture',
       desc: '',
       args: [],
     );
@@ -390,26 +290,6 @@ class S {
     );
   }
 
-  /// `Yes`
-  String get yes {
-    return Intl.message(
-      'Yes',
-      name: 'yes',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No`
-  String get no {
-    return Intl.message(
-      'No',
-      name: 'no',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `{name}'s house`
   String ownerHouse(Object name) {
     return Intl.message(
@@ -420,11 +300,91 @@ class S {
     );
   }
 
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Owner Comment`
   String get ownerComment {
     return Intl.message(
       'Owner Comment',
       name: 'ownerComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `House Specifications`
+  String get houseSpecifications {
+    return Intl.message(
+      'House Specifications',
+      name: 'houseSpecifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message(
+      'Type',
+      name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Living Room`
+  String get livingRoom {
+    return Intl.message(
+      'Living Room',
+      name: 'livingRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bedrooms`
+  String get bedrooms {
+    return Intl.message(
+      'Bedrooms',
+      name: 'bedrooms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor`
+  String get floor {
+    return Intl.message(
+      'Floor',
+      name: 'floor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area`
+  String get area {
+    return Intl.message(
+      'Area',
+      name: 'area',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furnished`
+  String get furnished {
+    return Intl.message(
+      'Furnished',
+      name: 'furnished',
       desc: '',
       args: [],
     );
@@ -447,6 +407,26 @@ class S {
       name: 'priceValue',
       desc: '',
       args: [price],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
     );
   }
 
@@ -745,6 +725,16 @@ class S {
     return Intl.message(
       'Is it Furnished ?',
       name: 'isFurnished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Furniture`
+  String get addFurniture {
+    return Intl.message(
+      'Add Furniture',
+      name: 'addFurniture',
       desc: '',
       args: [],
     );
@@ -1110,10 +1100,10 @@ class S {
     );
   }
 
-  /// `Distance`
+  /// `Dist`
   String get distance {
     return Intl.message(
-      'Distance',
+      'Dist',
       name: 'distance',
       desc: '',
       args: [],
@@ -1300,26 +1290,6 @@ class S {
     );
   }
 
-  /// `Password updated successfully`
-  String get passwordUpdatedSuccessfully {
-    return Intl.message(
-      'Password updated successfully',
-      name: 'passwordUpdatedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Error updating password: {error}`
-  String errorUpdatingPassword(Object error) {
-    return Intl.message(
-      'Error updating password: $error',
-      name: 'errorUpdatingPassword',
-      desc: '',
-      args: [error],
-    );
-  }
-
   /// `Edit Personal Account`
   String get editProfile {
     return Intl.message(
@@ -1345,26 +1315,6 @@ class S {
     return Intl.message(
       'Last Name',
       name: 'lastName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `New Password`
-  String get newPassword {
-    return Intl.message(
-      'New Password',
-      name: 'newPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Type your password to apply changes`
-  String get typeYourPasswordToApplyChanges {
-    return Intl.message(
-      'Type your password to apply changes',
-      name: 'typeYourPasswordToApplyChanges',
       desc: '',
       args: [],
     );
@@ -1410,11 +1360,31 @@ class S {
     );
   }
 
+  /// `Type your password to apply changes`
+  String get typeYourPasswordToApplyChanges {
+    return Intl.message(
+      'Type your password to apply changes',
+      name: 'typeYourPasswordToApplyChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Old Password`
   String get oldPassword {
     return Intl.message(
       'Old Password',
       name: 'oldPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
       desc: '',
       args: [],
     );
@@ -1447,6 +1417,26 @@ class S {
       name: 'passwordsDoNotMatch',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Password updated successfully`
+  String get passwordUpdatedSuccessfully {
+    return Intl.message(
+      'Password updated successfully',
+      name: 'passwordUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating password: {error}`
+  String errorUpdatingPassword(Object error) {
+    return Intl.message(
+      'Error updating password: $error',
+      name: 'errorUpdatingPassword',
+      desc: '',
+      args: [error],
     );
   }
 
@@ -1685,6 +1675,16 @@ class S {
     return Intl.message(
       'Select Birthdate',
       name: 'selectBirthdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
       desc: '',
       args: [],
     );
@@ -2085,6 +2085,86 @@ class S {
     return Intl.message(
       'm ago',
       name: 'minutesAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading notifications...`
+  String get loadingNotifications {
+    return Intl.message(
+      'Loading notifications...',
+      name: 'loadingNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notifications`
+  String get noNotifications {
+    return Intl.message(
+      'No notifications',
+      name: 'noNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Messages`
+  String get messages {
+    return Intl.message(
+      'Messages',
+      name: 'messages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading messages...`
+  String get loadingMessages {
+    return Intl.message(
+      'Loading messages...',
+      name: 'loadingMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No messages`
+  String get noMessages {
+    return Intl.message(
+      'No messages',
+      name: 'noMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message(
+      'Loading...',
+      name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
       desc: '',
       args: [],
     );

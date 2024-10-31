@@ -253,7 +253,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (samsarUser == null) {
       return Scaffold(
         body: Center(child: CustomLoadingScreen(
-          message: S.of(context).notLoggedIn,
+          message: S.of(context).loading,
         )),
       );
     } else {

@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:samsar/Widgets/widgets.dart';
 import 'package:samsar/values/app_routes.dart';
 
+import '../../l10n/l10n.dart';
+
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
 
@@ -40,8 +42,8 @@ class _NotificationsPageState extends State<NotificationsPage> with SingleTicker
           unselectedLabelColor: theme.cardColor,
           padding: EdgeInsets.only(top: 10),
           tabs: [
-            Tab(text: 'Notifications', icon: Icon(Icons.notifications)),
-            Tab(text: 'Messages', icon: Icon(Icons.message)),
+            Tab(text: S.of(context).notifications, icon: Icon(Icons.notifications)),
+            Tab(text: S.of(context).messages, icon: Icon(Icons.message)),
           ],
         ),
       ),
@@ -64,11 +66,11 @@ class _NotificationsPageState extends State<NotificationsPage> with SingleTicker
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CustomLoadingScreen(message: "Loading notifications...");
+          return CustomLoadingScreen(message: S.of(context).loadingNotifications);
         }
 
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text('No notifications'));
+          return Center(child: Text(S.of(context).noNotifications));
         }
 
         return ListView.builder(
@@ -108,11 +110,11 @@ class _NotificationsPageState extends State<NotificationsPage> with SingleTicker
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CustomLoadingScreen(message: "Loading messages...");
+          return CustomLoadingScreen(message: S.of(context).loadingMessages);
         }
 
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text('No messages'));
+          return Center(child: Text(S.of(context).noMessages));
         }
 
         return ListView.builder(
@@ -123,7 +125,7 @@ class _NotificationsPageState extends State<NotificationsPage> with SingleTicker
               future: db.collection('users').doc(conversation['otherUserId']).get(),
               builder: (context, userSnapshot) {
                 if (!userSnapshot.hasData) {
-                  return ListTile(title: Text('Loading...'));
+                  return ListTile(title: Text(S.of(context).loading));
                 }
                 var userData = userSnapshot.data!.data() as Map<String, dynamic>;
                 return ListTile(
@@ -162,16 +164,18 @@ class _NotificationsPageState extends State<NotificationsPage> with SingleTicker
     final date = timestamp.toDate();
     final diff = now.difference(date);
 
-    if (diff.inDays > 7) {
-      return '${date.day}/${date.month}/${date.year}';
+    if (diff.inDays > 365) {
+      return '${(diff.inDays / 365).floor()}${S.of(context).yearsAgo}';
+    } else if (diff.inDays > 30) {
+      return '${(diff.inDays / 30).floor()}${S.of(context).monthsAgo}';
     } else if (diff.inDays > 0) {
-      return '${diff.inDays}d ago';
+      return '${diff.inDays}${S.of(context).daysAgo}';
     } else if (diff.inHours > 0) {
-      return '${diff.inHours}h ago';
+      return '${diff.inHours}${S.of(context).hoursAgo}';
     } else if (diff.inMinutes > 0) {
-      return '${diff.inMinutes}m ago';
+      return '${diff.inMinutes}${S.of(context).minutesAgo}';
     } else {
-      return 'Just now';
+      return S.of(context).recently;
     }
   }
 }

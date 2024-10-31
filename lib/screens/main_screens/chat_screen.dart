@@ -13,7 +13,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     try {
-      // Check if the widget is being used
       return Center(
         child: CustomLoadingScreen(
           message: "We're Still Building This Part",

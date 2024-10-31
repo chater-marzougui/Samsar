@@ -33,7 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m5(error) =>
       "Erreur lors de la mise à jour de l\'état favori : ${error}";
 
-  static String m6(error) => "Erreur de mise à jour du mot de passe: ${error}";
+  static String m6(error) =>
+      "Erreur lors de la mise à jour du mot de passe : ${error}";
 
   static String m7(e) => "${e} est requis";
 
@@ -55,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFeatures": MessageLookupByLibrary.simpleMessage(
             "Ajouter des caractéristiques"),
         "addFurniture":
-            MessageLookupByLibrary.simpleMessage("Ajouter des meubles"),
+            MessageLookupByLibrary.simpleMessage("Ajouter un meuble"),
         "addMainImage": MessageLookupByLibrary.simpleMessage(
             "Ajouter une image principale"),
         "addedToFavorites":
@@ -82,10 +83,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "bedrooms": MessageLookupByLibrary.simpleMessage("Chambres"),
         "camera": MessageLookupByLibrary.simpleMessage("Appareil photo"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
-        "changeRating":
-            MessageLookupByLibrary.simpleMessage("Modifier l\'évaluation"),
+        "changeRating": MessageLookupByLibrary.simpleMessage("Modifier"),
         "changeToAnotherLoc":
-            MessageLookupByLibrary.simpleMessage("changer d\'emplacement"),
+            MessageLookupByLibrary.simpleMessage("changer d\'emplacement..."),
         "chooseAnImageSource": MessageLookupByLibrary.simpleMessage(
             "Choisissez une source d\'image"),
         "city": MessageLookupByLibrary.simpleMessage("Ville"),
@@ -114,7 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "describeIssue":
             MessageLookupByLibrary.simpleMessage("Décrivez votre problème"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Ignorer"),
-        "distance": MessageLookupByLibrary.simpleMessage("Distance"),
+        "distance": MessageLookupByLibrary.simpleMessage("Dist"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Modifier le profil"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -187,7 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "houseDeleteSuccess": MessageLookupByLibrary.simpleMessage(
             "Maison supprimée avec succès !"),
         "houseSpecifications":
-            MessageLookupByLibrary.simpleMessage("Spécifications de la maison"),
+            MessageLookupByLibrary.simpleMessage("Spécifications"),
         "houseUploadedSuccess": MessageLookupByLibrary.simpleMessage(
             "Annonce de maison téléchargée avec succès !"),
         "inbox": MessageLookupByLibrary.simpleMessage("Messages"),
@@ -198,9 +198,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "justContinue": MessageLookupByLibrary.simpleMessage("Continuer"),
         "justCurrent": MessageLookupByLibrary.simpleMessage("Actuel"),
         "justIn": MessageLookupByLibrary.simpleMessage("en"),
+        "language": MessageLookupByLibrary.simpleMessage("Langue"),
         "lastName": MessageLookupByLibrary.simpleMessage("Nom de famille"),
         "light": MessageLookupByLibrary.simpleMessage("Clair"),
         "livingRoom": MessageLookupByLibrary.simpleMessage("Salon"),
+        "loading": MessageLookupByLibrary.simpleMessage("Chargement..."),
+        "loadingMessages":
+            MessageLookupByLibrary.simpleMessage("Chargement des messages..."),
+        "loadingNotifications": MessageLookupByLibrary.simpleMessage(
+            "Chargement des notifications..."),
         "location": MessageLookupByLibrary.simpleMessage("Emplacement"),
         "logout": MessageLookupByLibrary.simpleMessage("Se déconnecter"),
         "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -210,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maxDistance": m9,
         "maxPrice": MessageLookupByLibrary.simpleMessage("Prix maximum"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "messages": MessageLookupByLibrary.simpleMessage("Messages"),
         "middleName":
             MessageLookupByLibrary.simpleMessage("Deuxième prénom (optionnel)"),
         "minPrice": MessageLookupByLibrary.simpleMessage("Prix minimum"),
@@ -228,8 +235,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Aucune image supplémentaire sélectionnée"),
         "noHousesListed": MessageLookupByLibrary.simpleMessage(
             "Vous n\'avez aucune maison listée."),
+        "noMessages": MessageLookupByLibrary.simpleMessage("Aucun message"),
         "noMoreHousesFound":
             MessageLookupByLibrary.simpleMessage("Plus de maisons trouvées"),
+        "noNotifications":
+            MessageLookupByLibrary.simpleMessage("Aucune notification"),
         "noRatings": MessageLookupByLibrary.simpleMessage("Aucune évaluation"),
         "noResultsFound":
             MessageLookupByLibrary.simpleMessage("Aucun résultat trouvé"),
@@ -239,16 +249,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("N\'est Pas Disponible"),
         "notLoggedIn":
             MessageLookupByLibrary.simpleMessage("Non authentifié..."),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "oldPassword":
             MessageLookupByLibrary.simpleMessage("Ancien mot de passe"),
         "options": MessageLookupByLibrary.simpleMessage("Options"),
-        "ownerComment":
-            MessageLookupByLibrary.simpleMessage("Commentaire du propriétaire"),
+        "ownerComment": MessageLookupByLibrary.simpleMessage("Commentaire"),
         "ownerHouse": m11,
         "ownerInfoMessage": MessageLookupByLibrary.simpleMessage(
             "Les informations sur le propriétaire seront automatiquement remplies en fonction des détails de votre compte."),
-        "ownerInformation": MessageLookupByLibrary.simpleMessage(
-            "Informations du propriétaire"),
+        "ownerInformation":
+            MessageLookupByLibrary.simpleMessage("Informations pour Contact"),
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
         "passwordRecoveryEmailSentSuccessfully":
             MessageLookupByLibrary.simpleMessage(
@@ -297,7 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Avis"),
         "salePrice": MessageLookupByLibrary.simpleMessage("Prix de vente"),
         "saveChanges": MessageLookupByLibrary.simpleMessage(
-            "Sauvegarder les modifications"),
+            "Enregistrer les modifications"),
         "search": MessageLookupByLibrary.simpleMessage("Recherche"),
         "selectBirthdate": MessageLookupByLibrary.simpleMessage(
             "Sélectionner la date de naissance"),

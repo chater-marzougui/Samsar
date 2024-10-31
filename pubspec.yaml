@@ -59,6 +59,18 @@ dependencies:
   fluttertoast: ^8.2.8
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.4.2
+  curved_navigation_bar: ^1.0.6
+
+flutter_native_splash:
+  color: "#E0E0E0"
+  image: assets/Logo/logo.png
+  android: true
+  ios: true
+
+  color_dark: "#212121"
+  image_dark: assets/Logo/logo_dark.png
+
 
 flutter_intl:
   enabled: true

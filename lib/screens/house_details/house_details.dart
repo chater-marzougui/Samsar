@@ -168,7 +168,7 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
                     buildDetailRow(
                         context, Icons.person, S.of(context).name, ownerFullName),
                     buildDetailRow(context, Icons.phone, S.of(context).phone, phoneNumber),
-                    buildDetailRow(context, Icons.email, S.of(context).email, email),
+                    buildDetailRow(context, Icons.email, S.of(context).email, email, wrapText: true),
                   ],
                 ),
               ),

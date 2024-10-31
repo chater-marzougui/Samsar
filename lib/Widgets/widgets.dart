@@ -47,6 +47,7 @@ Widget buildDetailRow(
                 style: theme.textTheme.titleSmall!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
+              const SizedBox(width: 4),
               Expanded(
                 child: Text(value, style: theme.textTheme.titleSmall),
               ),

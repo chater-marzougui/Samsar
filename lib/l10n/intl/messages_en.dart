@@ -110,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "describeIssue":
             MessageLookupByLibrary.simpleMessage("Describe your issue"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
-        "distance": MessageLookupByLibrary.simpleMessage("Distance"),
+        "distance": MessageLookupByLibrary.simpleMessage("Dist"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Edit Personal Account"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -196,9 +196,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "justContinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "justCurrent": MessageLookupByLibrary.simpleMessage("Current"),
         "justIn": MessageLookupByLibrary.simpleMessage("in"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lastName": MessageLookupByLibrary.simpleMessage("Last Name"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "livingRoom": MessageLookupByLibrary.simpleMessage("Living Room"),
+        "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+        "loadingMessages":
+            MessageLookupByLibrary.simpleMessage("Loading messages..."),
+        "loadingNotifications":
+            MessageLookupByLibrary.simpleMessage("Loading notifications..."),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -208,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maxDistance": m9,
         "maxPrice": MessageLookupByLibrary.simpleMessage("Max Price"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
+        "messages": MessageLookupByLibrary.simpleMessage("Messages"),
         "middleName":
             MessageLookupByLibrary.simpleMessage("Middle Name (optional)"),
         "minPrice": MessageLookupByLibrary.simpleMessage("Min Price"),
@@ -226,14 +233,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "No additional images selected"),
         "noHousesListed": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any houses listed."),
+        "noMessages": MessageLookupByLibrary.simpleMessage("No messages"),
         "noMoreHousesFound":
             MessageLookupByLibrary.simpleMessage("No more houses found"),
+        "noNotifications":
+            MessageLookupByLibrary.simpleMessage("No notifications"),
         "noRatings": MessageLookupByLibrary.simpleMessage("No ratings yet"),
         "noResultsFound":
             MessageLookupByLibrary.simpleMessage("No results found"),
         "noRooms": MessageLookupByLibrary.simpleMessage("0 if no rooms"),
         "notAvailable": MessageLookupByLibrary.simpleMessage("Not Available"),
         "notLoggedIn": MessageLookupByLibrary.simpleMessage("Not logged in..."),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "oldPassword": MessageLookupByLibrary.simpleMessage("Old Password"),
         "options": MessageLookupByLibrary.simpleMessage("Options"),
         "ownerComment": MessageLookupByLibrary.simpleMessage("Owner Comment"),

@@ -85,18 +85,22 @@ class _SettingsPageState extends State<SettingsPage> {
           ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
-              DropdownButton<String>(
-                value: _selectedLanguage,
-                onChanged: (String? newLocale) {
-                  if (newLocale != null) {
-                    _updateLanguage(newLocale);
-                  }
-                },
-                items: [
-                  DropdownMenuItem(value: 'en', child: Text('English')),
-                  DropdownMenuItem(value: 'fr', child: Text('French')),
-                  DropdownMenuItem(value: 'ar', child: Text('العربية')),
-                ],
+              ListTile(
+                title: Text(S.of(context).language),
+                subtitle: Text('${S.of(context).justCurrent}: ${_selectedLanguage == 'en' ? 'English' : _selectedLanguage== 'fr' ? 'French' : 'العربية'}'),
+                  trailing: DropdownButton<String>(
+                  value: _selectedLanguage,
+                  onChanged: (String? newLocale) {
+                    if (newLocale != null) {
+                      _updateLanguage(newLocale);
+                    }
+                  },
+                  items: [
+                    DropdownMenuItem(value: 'en', child: Text('English')),
+                    DropdownMenuItem(value: 'fr', child: Text('French')),
+                    DropdownMenuItem(value: 'ar', child: Text('العربية')),
+                  ],
+                ),
               ),
               ListTile(
                 title: Text(S.of(context).themeMode), // Localized 'Theme Mode'

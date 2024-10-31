@@ -83,7 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "changeRating": MessageLookupByLibrary.simpleMessage("تغيير التقييم"),
         "changeToAnotherLoc":
-            MessageLookupByLibrary.simpleMessage("التغيير إلى مكان آخر"),
+            MessageLookupByLibrary.simpleMessage("...التغيير إلى مكان آخر"),
         "chooseAnImageSource":
             MessageLookupByLibrary.simpleMessage("اختر مصدر الصورة"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
@@ -190,11 +190,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "isAvailable": MessageLookupByLibrary.simpleMessage("متوفر"),
         "isFurnished": MessageLookupByLibrary.simpleMessage("هل هو مؤثث؟"),
         "justContinue": MessageLookupByLibrary.simpleMessage("متابعة"),
-        "justCurrent": MessageLookupByLibrary.simpleMessage("الحالي"),
+        "justCurrent": MessageLookupByLibrary.simpleMessage("الحالية"),
         "justIn": MessageLookupByLibrary.simpleMessage("en"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "lastName": MessageLookupByLibrary.simpleMessage("اللقب"),
         "light": MessageLookupByLibrary.simpleMessage("فاتح"),
         "livingRoom": MessageLookupByLibrary.simpleMessage("غرفة المعيشة"),
+        "loading": MessageLookupByLibrary.simpleMessage("جارٍ التحميل..."),
+        "loadingMessages":
+            MessageLookupByLibrary.simpleMessage("جارٍ تحميل الرسائل..."),
+        "loadingNotifications":
+            MessageLookupByLibrary.simpleMessage("جارٍ تحميل الإشعارات..."),
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -204,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "maxDistance": m9,
         "maxPrice": MessageLookupByLibrary.simpleMessage("السعر الأقصى"),
         "message": MessageLookupByLibrary.simpleMessage("الرسالة"),
+        "messages": MessageLookupByLibrary.simpleMessage("رسائل"),
         "middleName":
             MessageLookupByLibrary.simpleMessage("الاسم الأوسط (اختياري)"),
         "minPrice": MessageLookupByLibrary.simpleMessage("السعر الأدنى"),
@@ -223,8 +230,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا توجد صور إضافية مختارة"),
         "noHousesListed": MessageLookupByLibrary.simpleMessage(
             "لا توجد لديك أي منازل مدرجة."),
+        "noMessages": MessageLookupByLibrary.simpleMessage("لا توجد رسائل"),
         "noMoreHousesFound": MessageLookupByLibrary.simpleMessage(
             "لم يتم العثور على المزيد من المنازل"),
+        "noNotifications":
+            MessageLookupByLibrary.simpleMessage("لا توجد إشعارات"),
         "noRatings": MessageLookupByLibrary.simpleMessage("لا توجد تقييمات"),
         "noResultsFound":
             MessageLookupByLibrary.simpleMessage("لم يتم العثور على نتائج"),
@@ -232,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notAvailable": MessageLookupByLibrary.simpleMessage("غير متاح"),
         "notLoggedIn":
             MessageLookupByLibrary.simpleMessage("لم يتم تسجيل الدخول..."),
+        "notifications": MessageLookupByLibrary.simpleMessage("إشعارات"),
         "oldPassword":
             MessageLookupByLibrary.simpleMessage("كلمة المرور القديمة"),
         "options": MessageLookupByLibrary.simpleMessage("الخيارات"),
