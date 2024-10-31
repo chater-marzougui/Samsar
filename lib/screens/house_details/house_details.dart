@@ -3,6 +3,7 @@ import 'package:samsar/Widgets/widgets.dart';
 import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/helpers/house_manager.dart';
 import '../../Widgets/location_doc.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
 class HouseDetailsPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
 
       setState(() {});
     } catch (e) {
-      if(mounted) showSnackBar(context, ("Error Fetching houses: $e"));
+      if(mounted) showSnackBar(context, S.of(context).errorFetchingHouses);
     }
   }
 
@@ -45,7 +46,7 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
         _isLoading = false;
       });
     } catch (e) {
-      if(mounted) showSnackBar(context, "Error checking favorite status: $e");
+      if(mounted) showSnackBar(context, S.of(context).errorCheckingFavoriteStatus(e));
     }
   }
 
@@ -58,10 +59,10 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
       });
 
       if (mounted) {
-        showSnackBar(context, _isFavorite ? "Added to favorites" : "Removed from favorites");
+        showSnackBar(context, _isFavorite ? S.of(context).addedToFavorites : S.of(context).removedFromFavorites);
       }
     } catch (e) {
-      if (mounted) showSnackBar(context, "Error updating favorite status: $e");
+      if (mounted) showSnackBar(context, S.of(context).errorUpdatingFavoriteStatus(e));
     }
   }
 
@@ -99,7 +100,7 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("${data.owner.prename}'s house"),
+            Text(S.of(context).ownerHouse(data.owner.prename)),
             if(data.owner.id != _userManager.samsarUser!.uid)
               IconButton(
                 icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
@@ -118,62 +119,60 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
             children: [
               EnhancedImageViewer(photos: photos),
               const SizedBox(height: 24),
-              // Location display with better UI and error handling
               LocationDocWidget(house: data),
               SizedBox(height: 8),
-              buildInfoDoc(context, Icons.location_city, 'City', city),
+              buildInfoDoc(context, Icons.location_city, S.of(context).city, city),
               SizedBox(height: 8),
-              buildInfoDoc(context, Icons.comment, 'Owner Comment', comment),
+              buildInfoDoc(context, Icons.comment, S.of(context).ownerComment, comment),
 
               const SizedBox(height: 12),
 
               buildInfoCard(
                 context,
                 Icons.house_outlined,
-                'House Specifications',
+                S.of(context).houseSpecifications,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildDetailRow(context, Icons.apartment, 'Type', type),
-                    buildDetailRow(context, Icons.tv, 'Living Room',
-                        hasLivingRoom ? 'Yes' : 'No'),
+                    buildDetailRow(context, Icons.apartment, S.of(context).type, type),
+                    buildDetailRow(context, Icons.tv, S.of(context).livingRoom,
+                        hasLivingRoom ? S.of(context).yes : S.of(context).no),
                     buildDetailRow(
-                        context, Icons.bed, 'Bedrooms', bedrooms.toString()),
+                        context, Icons.bed, S.of(context).bedrooms, bedrooms.toString()),
                     buildDetailRow(
-                        context, Icons.layers, 'Floor', floor.toString()),
+                        context, Icons.layers, S.of(context).floor, floor.toString()),
                     buildDetailRow(
-                        context, Icons.area_chart, 'Area', '$area m²'),
-                    buildDetailRow(context, Icons.weekend, 'Furnished',
-                        isFurnished ? 'Yes' : 'No'),
-                    buildDetailRow(context, Icons.attach_money_rounded, 'Price',
-                        '$price TND'),
+                        context, Icons.area_chart, S.of(context).area, '$area m²'),
+                    buildDetailRow(context, Icons.weekend, S.of(context).furnished,
+                        isFurnished ? S.of(context).yes : S.of(context).no),
+                    buildDetailRow(context, Icons.attach_money_rounded, S.of(context).price,
+                        S.of(context).priceValue(price)),
                   ],
                 ),
               ),
 
               if (isFurnished)
-                buildSection(context, Icons.chair, "Furniture", furniture),
+                buildSection(context, Icons.chair, S.of(context).furniture, furniture),
 
               if (data.specs.features.isNotEmpty)
                 buildSection(
-                    context, Icons.featured_video_sharp, "Options", features),
+                    context, Icons.featured_video_sharp, S.of(context).options, features),
 
               buildInfoCard(
                 context,
                 Icons.person_outline_sharp,
-                'Owner Information',
+                S.of(context).ownerInformation,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildDetailRow(
-                        context, Icons.person, 'Name', ownerFullName),
-                    buildDetailRow(context, Icons.phone, 'Phone', phoneNumber),
-                    buildDetailRow(context, Icons.email, 'Email', email),
+                        context, Icons.person, S.of(context).name, ownerFullName),
+                    buildDetailRow(context, Icons.phone, S.of(context).phone, phoneNumber),
+                    buildDetailRow(context, Icons.email, S.of(context).email, email),
                   ],
                 ),
               ),
 
-              //buildRatingCard(context, ratings, numberOfRaters),
               RatingSection(
                 house: _houseDetails,
                 onRatingUpdated: _fetchHouseDetails,

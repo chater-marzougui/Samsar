@@ -8,6 +8,7 @@ import 'package:samsar/Widgets/widgets.dart';
 import 'package:samsar/helpers/house_manager.dart';
 import 'package:samsar/helpers/user_manager.dart';
 import 'package:samsar/values/app_routes.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 import '../bottom_navigator.dart';
 
@@ -66,21 +67,21 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
 
     if (samsarUser == null) {
       return CustomLoadingScreen(
-        message: "Not logged in...",
+        message: S.of(context).notLoggedIn,
         indicatorColor: theme.primaryColor,
       );
     }
 
     if (_isLoading) {
       return CustomLoadingScreen(
-        message: "We're uploading your House, please wait...",
+        message:  S.of(context).weReUploadingWait,
         indicatorColor: theme.primaryColor,
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload House Listing'),
+        title: Text(S.of(context).uploadHouseListing),
         elevation: 0,
       ),
       body: Form(
@@ -127,7 +128,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                             ),
                           ),
                           child: Text(
-                            _currentStep == 4 ? 'Submit' : 'Continue',
+                            _currentStep == 4 ? S.of(context).submit : S.of(context).justContinue,
                           ),
                         ),
                         if (_currentStep > 0) ...[
@@ -137,7 +138,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                             style: TextButton.styleFrom(
                               minimumSize: Size(120, 40),
                             ),
-                            child: Text('Back'),
+                            child: Text(S.of(context).back),
                           ),
                         ],
                       ],
@@ -162,7 +163,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                 },
                 steps: [
                   Step(
-                    title: Text('Basic Information'),
+                    title: Text(S.of(context).basicInformation),
                     content: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -174,7 +175,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Main Image',
+                                  S.of(context).mainImage,
                                   style: Theme.of(context).textTheme.titleMedium,
                                 ),
                                 SizedBox(height: 8),
@@ -201,7 +202,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                                         children: [
                                           Icon(Icons.add_photo_alternate, size: 40),
                                           SizedBox(height: 8),
-                                          Text('Add Main Image'),
+                                          Text(S.of(context).addMainImage),
                                         ],
                                       ),
                                     ),
@@ -223,13 +224,13 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Additional Images',
+                                      S.of(context).additionalImages,
                                       style: Theme.of(context).textTheme.titleMedium,
                                     ),
                                     TextButton.icon(
                                       onPressed: () => _showImageSource(context, false),
                                       icon: Icon(Icons.add_photo_alternate),
-                                      label: Text('Add'),
+                                      label: Text(S.of(context).add),
                                     ),
                                   ],
                                 ),
@@ -287,7 +288,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                                                       borderRadius: BorderRadius.circular(12),
                                                     ),
                                                     child: Text(
-                                                      'Main',
+                                                      S.of(context).main,
                                                       style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12,
@@ -309,7 +310,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Center(
-                                      child: Text('No additional images selected'),
+                                      child: Text(S.of(context).noAdditionalImages),
                                     ),
                                   ),
                               ],
@@ -320,13 +321,13 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                     ),
                   ),
                   Step(
-                    title: Text('Specifications'),
+                    title: Text(S.of(context).houseSpecifications),
                     content: Column(
                       children: [
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'Type',
-                            hintText: 'villa, apartment, studio...',
+                            labelText: S.of(context).type,
+                            hintText: S.of(context).hintText,
                             hintStyle: TextStyle(color: Colors.grey[500]),
                           ),
                           keyboardType: TextInputType.text,
@@ -334,8 +335,8 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                              labelText: 'Floor',
-                              hintText: '0 for ground flour',
+                              labelText: S.of(context).floor,
+                              hintText: S.of(context).groundFloor,
                               hintStyle: TextStyle(color: Colors.grey[500]
                               ),
                           ),
@@ -343,8 +344,8 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                           onSaved: (value) => _floor = int.parse(value!),
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Rooms',
-                            hintText: '0 if no rooms',
+                          decoration: InputDecoration(labelText: S.of(context).bedrooms,
+                            hintText: S.of(context).noRooms,
                             hintStyle: TextStyle(color: Colors.grey[500]
                             ),
                           ),
@@ -352,8 +353,8 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                           onSaved: (value) => _rooms = int.parse(value!),
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Area (m²)',
-                            hintText: 'in m²',
+                          decoration: InputDecoration(labelText: '${S.of(context).area} (m²)',
+                            hintText: '${S.of(context).justIn} m²',
                             hintStyle: TextStyle(color: Colors.grey[500]
                             ),
                           ),
@@ -361,23 +362,23 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                           onSaved: (value) => _area = double.parse(value!),
                         ),
                         CheckboxListTile(
-                          title: Text('Has Living Room'),
+                          title: Text(S.of(context).hasLivingRoom),
                           value: _hasLivingRoom,
                           onChanged: (value) =>
                               setState(() => _hasLivingRoom = value!),
                         ),
                         CheckboxListTile(
-                          title: Text('Has Parking'),
+                          title: Text(S.of(context).hasParking),
                           value: _hasParking,
                           onChanged: (value) => setState(() => _hasParking = value!),
                         ),
                         CheckboxListTile(
-                          title: Text('Has WiFi'),
+                          title: Text(S.of(context).hasWifi),
                           value: _hasWifi,
                           onChanged: (value) => setState(() => _hasWifi = value!),
                         ),
                         CheckboxListTile(
-                          title: Text('Is Furnished'),
+                          title: Text(S.of(context).isFurnished),
                           value: _isFurnished,
                           onChanged: (value) => setState(() => _isFurnished = value!),
                         ),
@@ -389,15 +390,15 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                                   child: TextFormField(
                                     controller: _furnitureController,
                                     decoration: InputDecoration(
-                                      labelText: 'Add Furniture',
-                                      hintText: 'Fridge, TV, Table....',
+                                      labelText: S.of(context).addFurniture,
+                                      hintText: S.of(context).furnitureItems,
                                       hintStyle: TextStyle(color: Colors.grey[500]),
                                     ),
                                   ),
                                 ),
                                 ElevatedButton(
                                   onPressed: _addFurniture,
-                                  child: Text('Add'),
+                                  child: Text(S.of(context).add),
                                 ),
                               ],
                             ),
@@ -419,14 +420,14 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                               child: TextFormField(
                                 controller: _featureController,
                                 decoration: InputDecoration(
-                                    labelText: 'Add Features',
-                                    hintText: 'Garage, 2 Salle, 2 Toilet...'
+                                    labelText: S.of(context).addFeature,
+                                    hintText: S.of(context).garageFeatures
                                 ),
                               ),
                             ),
                             ElevatedButton(
                               onPressed: _addFeature,
-                              child: Text('Add'),
+                              child: Text(S.of(context).add),
                             ),
                           ],
                         ),
@@ -443,94 +444,89 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                     ),
                   ),
                   Step(
-                    title: Text('Status'),
+                    title: Text(S.of(context).status),
                     content: Column(
                       children: [
                         CheckboxListTile(
-                          title: Text('Is Available'),
+                          title: Text(S.of(context).isAvailable),
                           value: _isAvailable,
                           onChanged: (value) => setState(() => _isAvailable = value!),
                         ),
                         CheckboxListTile(
-                          title: Text('For Rent'),
+                          title: Text(S.of(context).forRent),
                           value: _isForRent,
                           onChanged: (value) => setState(() => _isForRent = value!),
                         ),
                         if (_isForRent)
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Price',
-                              hintText: 'in TND',
-                              hintStyle: TextStyle(color: Colors.grey[500]
-                              ),
+                            decoration: InputDecoration(
+                              labelText: S.of(context).price,
+                              hintText: '${S.of(context).justIn} TND',
+                              hintStyle: TextStyle(color: Colors.grey[500]),
                             ),
                             keyboardType: TextInputType.number,
                             onSaved: (value) => _price = int.parse(value!),
                           ),
                         CheckboxListTile(
-                          title: Text('For Sale'),
+                          title: Text(S.of(context).forSale),
                           value: _isForSale,
                           onChanged: (value) => setState(() => _isForSale = value!),
                         ),
                         if (_isForSale)
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Sale Price',
-                              hintText: 'in TND',
-                              hintStyle: TextStyle(color: Colors.grey[500]
-                              ),
+                            decoration: InputDecoration(
+                              labelText: S.of(context).salePrice,
+                              hintText: '${S.of(context).justIn} TND',
+                              hintStyle: TextStyle(color: Colors.grey[500]),
                             ),
                             keyboardType: TextInputType.number,
                             onSaved: (value) => _salePrice = int.parse(value!),
                           ),
                         CheckboxListTile(
-                          title: Text('Monthly Payment'),
+                          title: Text(S.of(context).monthlyPayment),
                           value: _isMonthlyPayment,
-                          onChanged: (value) =>
-                              setState(() => _isMonthlyPayment = value!),
+                          onChanged: (value) => setState(() => _isMonthlyPayment = value!),
                         ),
                         CheckboxListTile(
-                          title: Text('Daily Payment'),
+                          title: Text(S.of(context).dailyPayment),
                           value: _isDailyPayment,
-                          onChanged: (value) =>
-                              setState(() => _isDailyPayment = value!),
+                          onChanged: (value) => setState(() => _isDailyPayment = value!),
                         ),
                       ],
                     ),
                   ),
                   Step(
-                    title: Text('Location'),
+                    title: Text(S.of(context).location),
                     content: Column(
                       children: [
                         CheckboxListTile(
-                          title: Text('Use Current Location'),
+                          title: Text(S.of(context).useCurrentLocation),
                           value: _useCurrentLocation,
-                          onChanged: (value) =>
-                              setState(() => _useCurrentLocation = value!),
+                          onChanged: (value) => setState(() => _useCurrentLocation = value!),
                         ),
                         if (!_useCurrentLocation)
                           ElevatedButton(
                             onPressed: () {
                               // TODO: Implement custom location picker
-                              // This could open a map or a form to input address details
                             },
-                            child: Text('Pick Custom Location'),
+                            child: Text(S.of(context).pickCustomLocation),
                           ),
                       ],
                     ),
                   ),
                   Step(
-                    title: Text('Owner Information'),
+                    title: Text(S.of(context).ownerInformation),
                     content: Column(
                       children: [
                         TextFormField(
                           focusNode: _commentFocusNode,
-                          decoration: InputDecoration(labelText: 'Comment',
-                            hintText: 'villa, apartment, studio...',
+                          decoration: InputDecoration(
+                            labelText: S.of(context).comment,
+                            hintText: S.of(context).hintText,
                             hintStyle: TextStyle(color: Colors.grey[500]),
                           ),
                           onSaved: (value) => _comment = value!,
-                          onTapOutside: (_) => {
-                            _commentFocusNode.unfocus()
-                          },
+                          onTapOutside: (_) => {_commentFocusNode.unfocus()},
                         ),
                         SizedBox(height: 20),
                         Container(
@@ -555,7 +551,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                               SizedBox(width: 8.0),
                               Expanded(
                                 child: Text(
-                                  'Owner information will be automatically filled based on your account details.',
+                                  S.of(context).ownerInfoMessage,
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.blue[800],
@@ -564,7 +560,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -586,7 +582,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
             children: [
               ListTile(
                 leading: Icon(Icons.photo_library),
-                title: Text('Gallery'),
+                title: Text(S.of(context).gallery),
                 onTap: () {
                   Navigator.pop(context);
                   isMainImage ? _pickMainImageFrom(ImageSource.gallery)
@@ -595,7 +591,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
               ),
               ListTile(
                 leading: Icon(Icons.photo_camera),
-                title: Text('Camera'),
+                title: Text(S.of(context).camera),
                 onTap: () {
                   Navigator.pop(context);
                   isMainImage ? _pickMainImageFrom(ImageSource.camera)
@@ -783,7 +779,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
           _currentStep = 0;
         });
         if (mounted) {
-          showSnackBar(context, 'House listing uploaded successfully!');
+          showSnackBar(context, S.of(context).houseUploadedSuccess);
 
           if (context.mounted) {
             HomePage.switchToHomeTab(context);
@@ -801,7 +797,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
         setState(() {
           _isLoading = false;
         });
-        if (mounted) showSnackBar(context, 'Error uploading house listing: $e');
+        if (mounted) showSnackBar(context, S.of(context).errorUploadingHouse);
       }
     }
   }

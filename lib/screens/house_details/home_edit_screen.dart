@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:samsar/Widgets/widgets.dart';
+import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -59,7 +60,7 @@ class _HouseEditPageState extends State<HouseEditPage> {
         _images = List<String>.from(_houseDetails.images);
       });
     } catch (e) {
-      if (mounted) showSnackBar(context, "Error Fetching house details: $e");
+      if (mounted) showSnackBar(context, S.of(context).errorFetchingHouses);
     }
   }
 
@@ -77,9 +78,9 @@ class _HouseEditPageState extends State<HouseEditPage> {
           'specs.features': _features,
           'specs.furniture': _furniture,
         });
-        if (mounted) showSnackBar(context, "House details updated successfully");
+        if (mounted) showSnackBar(context, S.of(context).houseUploadedSuccess);
       } catch (e) {
-        if (mounted) showSnackBar(context, "Error updating house details: $e");
+        if (mounted) showSnackBar(context, S.of(context).errorUploadingHouse);
       }
     }
   }
@@ -88,11 +89,11 @@ class _HouseEditPageState extends State<HouseEditPage> {
     try {
       await db.collection('houses').doc(widget.houseId).delete();
       if (mounted) {
-        showSnackBar(context, "House deleted successfully");
+        showSnackBar(context, S.of(context).houseDeleteSuccess);
         Navigator.of(context).pop();
       }
     } catch (e) {
-      if (mounted) showSnackBar(context, "Error deleting house: $e");
+      if (mounted) showSnackBar(context, S.of(context).errorDeletingHouse);
     }
   }
 
@@ -107,13 +108,13 @@ class _HouseEditPageState extends State<HouseEditPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Update ${ _houseDetails.specs.type}"),
+        title: Text("${S.of(context).update} ${_houseDetails.specs.type}"),
         backgroundColor: Colors.blueAccent,
         actions: [
           TextButton(
             onPressed: _updateHouse,
             child: Text(
-              'Save Changes',
+              S.of(context).saveChanges,
               style: TextStyle(
                 fontSize: 17,
                 color: Colors.white,
@@ -157,16 +158,15 @@ class _HouseEditPageState extends State<HouseEditPage> {
                 const SizedBox(height: 20),
 
                 SwitchListTile(
-                  title: Text('Available',
+                  title: Text(S.of(context).available,
                       style: theme.textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w500,
                       )),
                   value: _isAvailable,
                   activeColor: Colors.green,
-                  subtitle: Text("Enable this if your house is available",
+                  subtitle: Text(S.of(context).availableHint,
                       style: theme.textTheme.titleSmall),
                   shape: Border.all(width: 2),
-
                   onChanged: (bool value) {
                     setState(() {
                       _isAvailable = value;
@@ -176,31 +176,31 @@ class _HouseEditPageState extends State<HouseEditPage> {
                 buildInfoCard(
                   context,
                   Icons.house_outlined,
-                  'House Specifications',
+                  S.of(context).houseSpecifications,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      buildDetailRow(context, Icons.apartment, 'Type', _houseDetails.specs.type),
-                      buildDetailRow(context, Icons.tv, 'Living Room',
-                          _houseDetails.specs.hasLivingRoom ? 'Yes' : 'No'),
+                      buildDetailRow(context, Icons.apartment, S.of(context).type, _houseDetails.specs.type),
+                      buildDetailRow(context, Icons.tv, S.of(context).livingRoom,
+                          _houseDetails.specs.hasLivingRoom ? S.of(context).yes : S.of(context).no),
                       buildDetailRow(
-                          context, Icons.bed, 'Bedrooms', _houseDetails.specs.rooms.toString()),
+                          context, Icons.bed, S.of(context).bedrooms, _houseDetails.specs.rooms.toString()),
                       buildDetailRow(
-                          context, Icons.layers, 'Floor', _houseDetails.specs.floor.toString()),
+                          context, Icons.layers, S.of(context).floor, _houseDetails.specs.floor.toString()),
                       buildDetailRow(
-                          context, Icons.area_chart, 'Area', '${_houseDetails.specs.area.round()} m²'),
+                          context, Icons.area_chart, S.of(context).area, '${_houseDetails.specs.area.round()} m²'),
                     ],
                   ),
                 ),
                 buildInfoCard(
                   context,
                   Icons.location_on,
-                  'Location',
+                  S.of(context).location,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      buildDetailRow(context, Icons.location_on, 'Address', _houseDetails.location.address),
-                      buildDetailRow(context, Icons.location_city, 'City', _houseDetails.location.city),
+                      buildDetailRow(context, Icons.location_on, S.of(context).address, _houseDetails.location.address),
+                      buildDetailRow(context, Icons.location_city, S.of(context).city, _houseDetails.location.city),
                     ],
                   ),
                 ),
@@ -209,7 +209,7 @@ class _HouseEditPageState extends State<HouseEditPage> {
 
                 // Editable fields
                 SwitchListTile(
-                  title: const Text('For Sale'),
+                  title: Text(S.of(context).forSale),
                   value: _isForSale,
                   onChanged: (bool value) {
                     setState(() {
@@ -220,17 +220,17 @@ class _HouseEditPageState extends State<HouseEditPage> {
                 if (_isForSale)
                   TextFormField(
                     controller: _salePriceController,
-                    decoration: const InputDecoration(labelText: 'Sale Price (TND)'),
+                    decoration: InputDecoration(labelText: '${S.of(context).salePrice} (TND)'),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (_isForSale && (value == null || value.isEmpty)) {
-                        return 'Please enter a sale price';
+                        return S.of(context).enterSalePrice;
                       }
                       return null;
                     },
                   ),
                 SwitchListTile(
-                  title: const Text('For Rent'),
+                  title: Text(S.of(context).forRent),
                   value: _isForRent,
                   onChanged: (bool value) {
                     setState(() {
@@ -241,18 +241,18 @@ class _HouseEditPageState extends State<HouseEditPage> {
                 if (_isForRent)
                   TextFormField(
                     controller: _priceController,
-                    decoration: const InputDecoration(labelText: 'Rent Price (TND)'),
+                    decoration: InputDecoration(labelText: '${S.of(context).rentPrice} (TND)'),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (_isForRent && (value == null || value.isEmpty)) {
-                        return 'Please enter a rent price';
+                        return S.of(context).enterRentPrice;
                       }
                       return null;
                     },
                   ),
                 const SizedBox(height: 10),
                 SwitchListTile(
-                  title: const Text('Furnished'),
+                  title: Text(S.of(context).furnished),
                   value: _isFurnished,
                   onChanged: (bool value) {
                     setState(() {
@@ -265,12 +265,12 @@ class _HouseEditPageState extends State<HouseEditPage> {
                     Expanded(
                       child: TextFormField(
                         controller: _furnitureController,
-                        decoration: const InputDecoration(labelText: 'Add Furniture'),
+                        decoration: InputDecoration(labelText: S.of(context).addFurniture),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: _addFurniture,
-                      child: const Text('Add'),
+                      child: Text(S.of(context).add),
                     ),
                   ],
                 ),
@@ -287,12 +287,12 @@ class _HouseEditPageState extends State<HouseEditPage> {
                     Expanded(
                       child: TextFormField(
                         controller: _featureController,
-                        decoration: const InputDecoration(labelText: 'Add Feature'),
+                        decoration: InputDecoration(labelText: S.of(context).addFeature),
                       ),
                     ),
                     ElevatedButton(
                       onPressed: _addFeature,
-                      child: const Text('Add'),
+                      child: Text(S.of(context).add),
                     ),
                   ],
                 ),
@@ -306,7 +306,7 @@ class _HouseEditPageState extends State<HouseEditPage> {
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: _commentController,
-                  decoration: const InputDecoration(labelText: 'Comment'),
+                  decoration: InputDecoration(labelText: S.of(context).comment),
                   maxLines: 3,
                 ),
                 const SizedBox(height: 25),
@@ -315,7 +315,7 @@ class _HouseEditPageState extends State<HouseEditPage> {
                     children: [
                       ElevatedButton(
                         onPressed: _updateHouse,
-                        child: const Text('Update House Details'),
+                        child: Text(S.of(context).updateHouseDetails),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
@@ -324,17 +324,17 @@ class _HouseEditPageState extends State<HouseEditPage> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: const Text('Delete House'),
-                                content: const Text('Are you sure you want to delete this house listing?'),
+                                title: Text(S.of(context).deleteHouse),
+                                content: Text(S.of(context).deleteHouseConfirmation),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: const Text('Cancel'),
+                                    child: Text(S.of(context).cancel),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
                                   ),
                                   TextButton(
-                                    child: const Text('Delete'),
+                                    child: Text(S.of(context).delete),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                       _deleteHouse();
@@ -346,7 +346,8 @@ class _HouseEditPageState extends State<HouseEditPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                        child: const Text('Delete House', style: TextStyle(color: Colors.white70)),
+                        child: Text(S.of(context).deleteHouse,
+                            style: TextStyle(color: Colors.white70)),
                       ),
                     ],
                   ),
@@ -355,7 +356,7 @@ class _HouseEditPageState extends State<HouseEditPage> {
             ),
           ),
         ),
-      ),
+        ),
     );
   }
 

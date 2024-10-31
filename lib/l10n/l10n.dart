@@ -99,6 +99,816 @@ class S {
       args: [],
     );
   }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available`
+  String get available {
+    return Intl.message(
+      'Available',
+      name: 'available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable this if your house is available`
+  String get availableHint {
+    return Intl.message(
+      'Enable this if your house is available',
+      name: 'availableHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `House Specifications`
+  String get houseSpecifications {
+    return Intl.message(
+      'House Specifications',
+      name: 'houseSpecifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message(
+      'Type',
+      name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Living Room`
+  String get livingRoom {
+    return Intl.message(
+      'Living Room',
+      name: 'livingRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bedrooms`
+  String get bedrooms {
+    return Intl.message(
+      'Bedrooms',
+      name: 'bedrooms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor`
+  String get floor {
+    return Intl.message(
+      'Floor',
+      name: 'floor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Area`
+  String get area {
+    return Intl.message(
+      'Area',
+      name: 'area',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get address {
+    return Intl.message(
+      'Address',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For Sale`
+  String get forSale {
+    return Intl.message(
+      'For Sale',
+      name: 'forSale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For Rent`
+  String get forRent {
+    return Intl.message(
+      'For Rent',
+      name: 'forRent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sale Price`
+  String get salePrice {
+    return Intl.message(
+      'Sale Price',
+      name: 'salePrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rent Price`
+  String get rentPrice {
+    return Intl.message(
+      'Rent Price',
+      name: 'rentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a sale price`
+  String get enterSalePrice {
+    return Intl.message(
+      'Please enter a sale price',
+      name: 'enterSalePrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a rent price`
+  String get enterRentPrice {
+    return Intl.message(
+      'Please enter a rent price',
+      name: 'enterRentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furnished`
+  String get furnished {
+    return Intl.message(
+      'Furnished',
+      name: 'furnished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Furniture`
+  String get addFurniture {
+    return Intl.message(
+      'Add Furniture',
+      name: 'addFurniture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Feature`
+  String get addFeature {
+    return Intl.message(
+      'Add Feature',
+      name: 'addFeature',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment`
+  String get comment {
+    return Intl.message(
+      'Comment',
+      name: 'comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update House Details`
+  String get updateHouseDetails {
+    return Intl.message(
+      'Update House Details',
+      name: 'updateHouseDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete House`
+  String get deleteHouse {
+    return Intl.message(
+      'Delete House',
+      name: 'deleteHouse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this house listing?`
+  String get deleteHouseConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this house listing?',
+      name: 'deleteHouseConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{name}'s house`
+  String ownerHouse(Object name) {
+    return Intl.message(
+      '$name\'s house',
+      name: 'ownerHouse',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Owner Comment`
+  String get ownerComment {
+    return Intl.message(
+      'Owner Comment',
+      name: 'ownerComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{price} TND`
+  String priceValue(Object price) {
+    return Intl.message(
+      '$price TND',
+      name: 'priceValue',
+      desc: '',
+      args: [price],
+    );
+  }
+
+  /// `Furniture`
+  String get furniture {
+    return Intl.message(
+      'Furniture',
+      name: 'furniture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Options`
+  String get options {
+    return Intl.message(
+      'Options',
+      name: 'options',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Owner Information`
+  String get ownerInformation {
+    return Intl.message(
+      'Owner Information',
+      name: 'ownerInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get phone {
+    return Intl.message(
+      'Phone',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We're uploading your House, please wait...`
+  String get weReUploadingWait {
+    return Intl.message(
+      'We\'re uploading your House, please wait...',
+      name: 'weReUploadingWait',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload House Listing`
+  String get uploadHouseListing {
+    return Intl.message(
+      'Upload House Listing',
+      name: 'uploadHouseListing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is Available`
+  String get isAvailable {
+    return Intl.message(
+      'Is Available',
+      name: 'isAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Payment`
+  String get monthlyPayment {
+    return Intl.message(
+      'Monthly Payment',
+      name: 'monthlyPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Payment`
+  String get dailyPayment {
+    return Intl.message(
+      'Daily Payment',
+      name: 'dailyPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use Current Location`
+  String get useCurrentLocation {
+    return Intl.message(
+      'Use Current Location',
+      name: 'useCurrentLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Custom Location`
+  String get pickCustomLocation {
+    return Intl.message(
+      'Pick Custom Location',
+      name: 'pickCustomLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `villa, apartment, studio...`
+  String get hintText {
+    return Intl.message(
+      'villa, apartment, studio...',
+      name: 'hintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Owner information will be automatically filled based on your account details.`
+  String get ownerInfoMessage {
+    return Intl.message(
+      'Owner information will be automatically filled based on your account details.',
+      name: 'ownerInfoMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `in`
+  String get justIn {
+    return Intl.message(
+      'in',
+      name: 'justIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic Information`
+  String get basicInformation {
+    return Intl.message(
+      'Basic Information',
+      name: 'basicInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Main Image`
+  String get mainImage {
+    return Intl.message(
+      'Main Image',
+      name: 'mainImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Main Image`
+  String get addMainImage {
+    return Intl.message(
+      'Add Main Image',
+      name: 'addMainImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Images`
+  String get additionalImages {
+    return Intl.message(
+      'Additional Images',
+      name: 'additionalImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Main`
+  String get main {
+    return Intl.message(
+      'Main',
+      name: 'main',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No additional images selected`
+  String get noAdditionalImages {
+    return Intl.message(
+      'No additional images selected',
+      name: 'noAdditionalImages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get justContinue {
+    return Intl.message(
+      'Continue',
+      name: 'justContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message(
+      'Back',
+      name: 'back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The house has a living room ?`
+  String get hasLivingRoom {
+    return Intl.message(
+      'The house has a living room ?',
+      name: 'hasLivingRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The house has a parking ?`
+  String get hasParking {
+    return Intl.message(
+      'The house has a parking ?',
+      name: 'hasParking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Does it have a WiFi ?`
+  String get hasWifi {
+    return Intl.message(
+      'Does it have a WiFi ?',
+      name: 'hasWifi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is it Furnished ?`
+  String get isFurnished {
+    return Intl.message(
+      'Is it Furnished ?',
+      name: 'isFurnished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Features`
+  String get addFeatures {
+    return Intl.message(
+      'Add Features',
+      name: 'addFeatures',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Garage, 2 Rooms, 2 Toilets...`
+  String get garageFeatures {
+    return Intl.message(
+      'Garage, 2 Rooms, 2 Toilets...',
+      name: 'garageFeatures',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fridge, TV, Table....`
+  String get furnitureItems {
+    return Intl.message(
+      'Fridge, TV, Table....',
+      name: 'furnitureItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `0 if no rooms`
+  String get noRooms {
+    return Intl.message(
+      '0 if no rooms',
+      name: 'noRooms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `0 for ground floor`
+  String get groundFloor {
+    return Intl.message(
+      '0 for ground floor',
+      name: 'groundFloor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not logged in...`
+  String get notLoggedIn {
+    return Intl.message(
+      'Not logged in...',
+      name: 'notLoggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `House listing uploaded successfully!`
+  String get houseUploadedSuccess {
+    return Intl.message(
+      'House listing uploaded successfully!',
+      name: 'houseUploadedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error uploading house listing`
+  String get errorUploadingHouse {
+    return Intl.message(
+      'Error uploading house listing',
+      name: 'errorUploadingHouse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error Fetching house details`
+  String get errorFetchingHouses {
+    return Intl.message(
+      'Error Fetching house details',
+      name: 'errorFetchingHouses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `House deleted successfully!`
+  String get houseDeleteSuccess {
+    return Intl.message(
+      'House deleted successfully!',
+      name: 'houseDeleteSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting house`
+  String get errorDeletingHouse {
+    return Intl.message(
+      'Error deleting house',
+      name: 'errorDeletingHouse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error checking favorite status: {error}`
+  String errorCheckingFavoriteStatus(Object error) {
+    return Intl.message(
+      'Error checking favorite status: $error',
+      name: 'errorCheckingFavoriteStatus',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Added to favorites`
+  String get addedToFavorites {
+    return Intl.message(
+      'Added to favorites',
+      name: 'addedToFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removed from favorites`
+  String get removedFromFavorites {
+    return Intl.message(
+      'Removed from favorites',
+      name: 'removedFromFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error updating favorite status: {error}`
+  String errorUpdatingFavoriteStatus(Object error) {
+    return Intl.message(
+      'Error updating favorite status: $error',
+      name: 'errorUpdatingFavoriteStatus',
+      desc: '',
+      args: [error],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
