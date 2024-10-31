@@ -71,6 +71,24 @@ class HouseManager {
     }
   }
 
+  Future<String> getNextHouse(House currentHouse) async {
+    final index = _houses.indexOf(currentHouse);
+    if (index == _houses.length - 1) {
+      return "";
+    }
+    final nextHouse = _houses[index + 1];
+    return nextHouse.id;
+  }
+
+  Future<String> getPreviousHouse(House currentHouse) async {
+    final index = _houses.indexOf(currentHouse);
+    if (index == 0) {
+      return "";
+    }
+    final previousHouse = _houses[index - 1];
+    return previousHouse.id;
+  }
+
   Future<void> fetchHousesWithDistance(
       {Map<String, dynamic>? filters, bool sortWithPrice = false}) async {
     try {

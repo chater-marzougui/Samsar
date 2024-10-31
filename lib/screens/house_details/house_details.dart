@@ -6,6 +6,29 @@ import '../../Widgets/location_doc.dart';
 import '../../l10n/l10n.dart';
 import '../../values/structures.dart';
 
+class SlidePageRoute extends PageRouteBuilder {
+  final Widget page;
+  final bool slideFromRight;
+
+  SlidePageRoute({required this.page, required this.slideFromRight})
+      : super(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(slideFromRight ? 1.0 : -1.0, 0.0);
+      var end = Offset.zero;
+      var curve = Curves.easeInOutCubic;
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      var offsetAnimation = animation.drive(tween);
+
+      return SlideTransition(
+        position: offsetAnimation,
+        child: child,
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 300),
+  );
+}
+
 class HouseDetailsPage extends StatefulWidget {
   final String houseId;
 
@@ -21,6 +44,11 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
   final UserManager _userManager = UserManager();
   bool _isLoading = true;
   bool _isFavorite = false;
+  bool _isNavigating = false;
+
+  String _nextHouseId = '';
+  String _previousHouseId = '';
+
 
   @override
   void initState() {
@@ -28,12 +56,67 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
     _fetchHouseDetails();
   }
 
+  Future<String> _getNextHouse() async {
+    // this returns the next house id
+    return _houseManager.getNextHouse(_houseDetails);
+  }
+
+  Future<String> _getPreviousHouse() async {
+    // this returns the previous house id
+    return _houseManager.getPreviousHouse(_houseDetails);
+  }
+
+  Future<void> _navigateToHouse(String houseId) async {
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        SlidePageRoute(
+          page: HouseDetailsPage(houseId: houseId),
+          slideFromRight: houseId == _nextHouseId,
+        ),
+      );
+    }
+  }
+
+  Future<void> _handleSwipe(DragEndDetails details) async {
+    if (_isNavigating) return;
+
+    final velocity = details.primaryVelocity ?? 0;
+    if (velocity.abs() < 300) return;
+
+    setState(() => _isNavigating = true);
+
+    try {
+      String? nextHouseId;
+      if (velocity > 0) {
+        nextHouseId = _previousHouseId;
+      } else {
+        nextHouseId = _nextHouseId;
+      }
+
+      if (nextHouseId.isNotEmpty && mounted) {
+        await _navigateToHouse(nextHouseId);
+      }
+    } catch (e) {
+      if (mounted) {
+        showSnackBar(context, S.of(context).errorFetchingHouses);
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isNavigating = false);
+      }
+    }
+  }
+
+
   Future<void> _fetchHouseDetails() async {
     try {
       _houseDetails = await _houseManager.getHouseById(widget.houseId);
       _checkFavoriteAndRateStatus();
 
       setState(() {});
+      _nextHouseId = await _getNextHouse();
+      _previousHouseId = await _getPreviousHouse();
     } catch (e) {
       if(mounted) showSnackBar(context, S.of(context).errorFetchingHouses);
     }
@@ -85,8 +168,6 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
     int floor = data.specs.floor;
     int price = data.specs.price;
     String comment = data.comment;
-    // int numberOfRaters = data.rate.raters;
-    // int ratings = data.rate.totalRating;
     String city = data.location.city;
     int area = data.specs.area.round();
     String type = data.specs.type;
@@ -111,73 +192,75 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
         ),
         backgroundColor: Colors.blueAccent,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              EnhancedImageViewer(photos: photos),
-              const SizedBox(height: 24),
-              LocationDocWidget(house: data),
-              SizedBox(height: 8),
-              buildInfoDoc(context, Icons.location_city, S.of(context).city, city),
-              SizedBox(height: 8),
-              buildInfoDoc(context, Icons.comment, S.of(context).ownerComment, comment),
+      body: GestureDetector(
+        onHorizontalDragEnd: _handleSwipe,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                EnhancedImageViewer(photos: photos),
+                const SizedBox(height: 24),
+                LocationDocWidget(house: data),
+                SizedBox(height: 8),
+                buildInfoDoc(context, Icons.location_city, S.of(context).city, city),
+                SizedBox(height: 8),
+                buildInfoDoc(context, Icons.comment, S.of(context).ownerComment, comment),
 
-              const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-              buildInfoCard(
-                context,
-                Icons.house_outlined,
-                S.of(context).houseSpecifications,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildDetailRow(context, Icons.apartment, S.of(context).type, type),
-                    buildDetailRow(context, Icons.tv, S.of(context).livingRoom,
-                        hasLivingRoom ? S.of(context).yes : S.of(context).no),
-                    buildDetailRow(
-                        context, Icons.bed, S.of(context).bedrooms, bedrooms.toString()),
-                    buildDetailRow(
-                        context, Icons.layers, S.of(context).floor, floor.toString()),
-                    buildDetailRow(
-                        context, Icons.area_chart, S.of(context).area, '$area m²'),
-                    buildDetailRow(context, Icons.weekend, S.of(context).furnished,
-                        isFurnished ? S.of(context).yes : S.of(context).no),
-                    buildDetailRow(context, Icons.attach_money_rounded, S.of(context).price,
-                        S.of(context).priceValue(price)),
-                  ],
+                buildInfoCard(
+                  context,
+                  Icons.house_outlined,
+                  S.of(context).houseSpecifications,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildDetailRow(context, Icons.apartment, S.of(context).type, type),
+                      buildDetailRow(context, Icons.tv, S.of(context).livingRoom,
+                          hasLivingRoom ? S.of(context).yes : S.of(context).no),
+                      buildDetailRow(
+                          context, Icons.bed, S.of(context).bedrooms, bedrooms.toString()),
+                      buildDetailRow(
+                          context, Icons.layers, S.of(context).floor, floor.toString()),
+                      buildDetailRow(
+                          context, Icons.area_chart, S.of(context).area, '$area m²'),
+                      buildDetailRow(context, Icons.weekend, S.of(context).furnished,
+                          isFurnished ? S.of(context).yes : S.of(context).no),
+                      buildDetailRow(context, Icons.attach_money_rounded, S.of(context).price,
+                          S.of(context).priceValue(price)),
+                    ],
+                  ),
                 ),
-              ),
 
-              if (isFurnished)
-                buildSection(context, Icons.chair, S.of(context).furniture, furniture),
+                if (isFurnished)
+                  buildSection(context, Icons.chair, S.of(context).furniture, furniture),
 
-              if (data.specs.features.isNotEmpty)
-                buildSection(
-                    context, Icons.featured_video_sharp, S.of(context).options, features),
+                if (data.specs.features.isNotEmpty)
+                  buildSection(
+                      context, Icons.featured_video_sharp, S.of(context).options, features),
 
-              buildInfoCard(
-                context,
-                Icons.person_outline_sharp,
-                S.of(context).ownerInformation,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildDetailRow(
-                        context, Icons.person, S.of(context).name, ownerFullName),
-                    buildDetailRow(context, Icons.phone, S.of(context).phone, phoneNumber),
-                    buildDetailRow(context, Icons.email, S.of(context).email, email, wrapText: true),
-                  ],
+                buildInfoCard(
+                  context,
+                  Icons.person_outline_sharp,
+                  S.of(context).ownerInformation,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildDetailRow(
+                          context, Icons.person, S.of(context).name, ownerFullName),
+                      buildDetailRow(context, Icons.phone, S.of(context).phone, phoneNumber),
+                      buildDetailRow(context, Icons.email, S.of(context).email, email, wrapText: true),
+                    ],
+                  ),
                 ),
-              ),
-
-              RatingSection(
-                house: _houseDetails,
-                onRatingUpdated: _fetchHouseDetails,
-              ),
-            ],
+                RatingSection(
+                  house: _houseDetails,
+                  onRatingUpdated: _fetchHouseDetails,
+                ),
+              ],
+            ),
           ),
         ),
       ),

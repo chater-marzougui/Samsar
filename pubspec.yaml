@@ -69,7 +69,7 @@ flutter_native_splash:
   ios: true
 
   color_dark: "#212121"
-  image_dark: assets/Logo/logo_dark.png
+  image_dark: assets/Logo/logo.png
 
 
 flutter_intl:
