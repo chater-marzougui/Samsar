@@ -1,5 +1,0 @@
-{
-  "title": "Welcome",
-  "greeting": "Hello, {name}!",
-  "description": "This is a multi-language Flutter app."
-}
