@@ -39,26 +39,46 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<CurvedNavigationBarState> _navigationKey = GlobalKey();
   DateTime? lastPressed;
 
-  final List<Widget> _pages = [
-    HomeScreen(),
-    SearchScreen(),
-    HouseUploadPage(),
-    NotificationsPage(),
-    ProfileScreen(),
-  ];
-
+  late final List<Widget> _pages;
+  late final List<Widget> _pageWidgets;
   final List<bool> _pagesUnderNav = [true, true, false, false, false];
 
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      for (int i = 0; i < _pageWidgets.length; i++) {
+        _pageWidgets[i] = Offstage(
+          offstage: _selectedIndex != i,
+          child: TickerMode(
+            enabled: _selectedIndex == i,
+            child: _pages[i],
+          ),
+        );
+      }
     });
   }
 
   @override
   void initState() {
     super.initState();
+    _pages = [
+      HomeScreen(),
+      SearchScreen(),
+      HouseUploadPage(),
+      NotificationsPage(),
+      ProfileScreen(),
+    ];
+
+    _pageWidgets = _pages.asMap().entries.map((entry) {
+      return Offstage(
+        offstage: _selectedIndex != entry.key,
+        child: TickerMode(
+          enabled: _selectedIndex == entry.key,
+          child: entry.value,
+        ),
+      );
+    }).toList();
     checkUserAdditionalInfo();
   }
 
@@ -99,13 +119,16 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           children: [
             // Pages that go under the navbar
-            if (_pagesUnderNav[_selectedIndex])
-              _pages[_selectedIndex]
-            else
-              Padding(
-                padding: EdgeInsets.only(bottom: 60 + bottomPadding), // Height of navbar
-                child: _pages[_selectedIndex],
-              ),
+            Stack(
+              children: _pagesUnderNav[_selectedIndex]
+                  ? _pageWidgets
+                  : _pageWidgets.map((widget) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 60 + bottomPadding),
+                  child: widget,
+                );
+              }).toList(),
+            ),
 
             // Navigation bar
             Positioned(
@@ -123,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                   color: theme.primaryColor,
                   buttonBackgroundColor: theme.primaryColor,
                   height: 60,
-                  animationDuration: const Duration(milliseconds: 300),
+                  animationDuration: const Duration(milliseconds: 400),
                   animationCurve: Curves.easeInOut,
                   onTap: _onItemTapped,
                   items: <Widget>[

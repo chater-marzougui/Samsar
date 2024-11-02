@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +141,7 @@ class UserManager with WidgetsBindingObserver {
       await loadUserData();
       return samsarUser?.favouriteHouses.contains(houseId) ?? false;
     } catch (e) {
-      rethrow; // Re-throwing the error to handle in the screen
+      rethrow;
     }
   }
 

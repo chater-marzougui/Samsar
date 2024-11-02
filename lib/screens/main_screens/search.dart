@@ -28,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen>
   bool _isListNearbyEmpty = true;
 
   LatLng? _currentPosition;
-  double _maxAllowedDistance = 50.0;
+  double _maxAllowedDistance = 100.0;
   bool _sortByDistance = true;
 
   final TextEditingController _searchController = TextEditingController();
@@ -240,7 +240,7 @@ class _SearchScreenState extends State<SearchScreen>
                                 (context, index) {
                               if (index < _houseManager.housesWithDistance.length) {
                                 final houseWithDistance = _houseManager.housesWithDistance[index];
-                                if (houseWithDistance.distance < _maxAllowedDistance * 10000000) {
+                                if (houseWithDistance.distance < _maxAllowedDistance * 1000) {
                                   _isListNearbyEmpty = false;
                                   return HousePreviewWidget(
                                     house: houseWithDistance.house,
@@ -279,7 +279,6 @@ class _SearchScreenState extends State<SearchScreen>
                                                   color: theme.disabledColor,
                                                 ),
                                               ),
-
                                             ],
                                           ),
                                         ),
@@ -486,9 +485,9 @@ class _SearchScreenState extends State<SearchScreen>
                   Text(S.of(context).maxDistance(_maxAllowedDistance.round())),
                   Slider(
                     min: 1,
-                    max: 50,
+                    max: 100,
                     value: _maxAllowedDistance,
-                    divisions: 49,
+                    divisions: 99,
                     label: _maxAllowedDistance.round().toString(),
                     onChanged: (value) {
                       setState(() {

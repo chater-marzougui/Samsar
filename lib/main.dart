@@ -87,12 +87,6 @@ class MyAppState extends State<MyApp> {
         Locale('fr', 'FR'),
         Locale('ar', 'AR'),
       ],
-      // builder: (context, child) {
-      //   return Directionality(
-      //     textDirection: TextDirection.ltr,
-      //     child: child!,
-      //   );
-      // },
       themeMode: _themeMode,
       theme: _lightTheme(),
       darkTheme: _darkTheme(),

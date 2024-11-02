@@ -196,7 +196,7 @@ class HouseManager {
       filteredHouses = getHousesInsidePolygon(filteredHouses, _lastPolygon);
     }
     filteredHouses =
-        filteredHouses.where((house) => house.priorityLevel >= 0).toList();
+        filteredHouses.where((house) => house.priorityLevel >= _shownLevel).toList();
     _markers = filteredHouses.map((house) => _createMarker(house)).toList();
   }
 
@@ -288,7 +288,7 @@ class HouseManager {
 
   void updateShownLevel(int level) {
     _shownLevel = level;
-    _updateMarkers(_localFiltersUpdate(_houses));
+    _updateMarkers(_houses);
   }
 
   void updateHouses(List<House> houses) {

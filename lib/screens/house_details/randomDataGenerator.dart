@@ -1,8 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
+import 'package:path/path.dart' as path;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 List<String> homeFeatures = [
@@ -315,6 +322,24 @@ Future<void> fetchAddSomethingAndReUpload() async {
   }
 }
 
+List<XFile> _images = [];
+
+Future<List<String>> uploadImages(List<String> images) async {
+  List<String> imageUrls = [];
+  for (var image in _images) {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('house_images/${DateTime.now()}_$fileName');
+    UploadTask uploadTask = storageReference.putFile(File(image.path));
+    await uploadTask.whenComplete(() async {
+      String url = await storageReference.getDownloadURL();
+      imageUrls.add(url);
+    });
+  }
+  return imageUrls;
+}
+
 Future<void> fetchAddDatesAndReUpload() async {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -377,7 +402,6 @@ Future<void> modifyFields() async {
     for (var doc in snapshot.docs) {
       Map<String, dynamic> houseData = doc.data() as Map<String, dynamic>;
 
-      // Delete the specified fields
       var x = await isoCodeFromLatLong(houseData["location"]["latitude"], houseData["location"]["longitude"]);
       houseData['location']['city'] = x['address']['state_district'];
       // Re-upload the updated document
@@ -385,5 +409,134 @@ Future<void> modifyFields() async {
     }
   } else {
     print('empty');
+  }
+}
+
+class FirebaseImageUpdater {
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final Random _random = Random();
+
+  // Load all local images from assets
+  Future<List<File>> _getLocalImages() async {
+    List<File> imageFiles = [];
+    try {
+      // Get the manifest file
+      final manifestContent = await rootBundle.loadString('AssetManifest.json');
+      final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+      // Filter for your images
+      final imagePaths = manifestMap.keys
+          .where((String key) => key.startsWith('assets/fake/') && key.endsWith('.jpg'))
+          .toList();
+
+      // Copy assets to temporary directory to get File objects
+      final tempDir = await getTemporaryDirectory();
+
+      for (String assetPath in imagePaths) {
+        final ByteData data = await rootBundle.load(assetPath);
+        final bytes = data.buffer.asUint8List();
+
+        final String filename = path.basename(assetPath);
+        final File tempFile = File('${tempDir.path}/$filename');
+        await tempFile.writeAsBytes(bytes);
+
+        imageFiles.add(tempFile);
+        print('Loaded image: $filename');
+      }
+
+      // Sort to ensure consistent ordering
+      imageFiles.sort((a, b) => path.basename(a.path).compareTo(path.basename(b.path)));
+
+    } catch (e) {
+      print('Error loading local images: $e');
+      rethrow;
+    }
+    return imageFiles;
+  }
+
+  // Upload a single image to Firebase Storage
+  Future<String?> _uploadSingleImage(File imageFile) async {
+    try {
+      String fileName = path.basename(imageFile.path);
+      String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference storageRef = _storage.ref().child('house_images/${timestamp}_$fileName');
+
+      UploadTask uploadTask = storageRef.putFile(imageFile);
+      await uploadTask.whenComplete(() => null);
+
+      String downloadUrl = await storageRef.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print('Error uploading image ${imageFile.path}: $e');
+      return null;
+    }
+  }
+
+  // Upload all images to Firebase Storage
+  Future<List<String>> _uploadAllImages(List<File> imageFiles) async {
+    List<String> allImageUrls = [];
+
+    for (var imageFile in imageFiles) {
+      String? imageUrl = await _uploadSingleImage(imageFile);
+      if (imageUrl != null) {
+        allImageUrls.add(imageUrl);
+        print('Uploaded: ${path.basename(imageFile.path)} -> $imageUrl');
+      }
+    }
+
+    return allImageUrls;
+  }
+
+  // Get random subset of images
+  List<String> _getRandomImages(List<String> allImages) {
+    // Generate random number between 2 and 12
+    int numberOfImages = _random.nextInt(11) + 2; // 2 to 12 images
+
+    // Shuffle the list and take the first n elements
+    List<String> shuffled = List.from(allImages)..shuffle(_random);
+    return shuffled.take(numberOfImages).toList();
+  }
+
+  // Update all houses in Firestore
+  Future<void> updateAllHousesImages() async {
+    try {
+      // First, load and upload all local images
+      print('Loading local images from assets...');
+      List<File> localImages = await _getLocalImages();
+
+      if (localImages.isEmpty) {
+        throw Exception('No images found in assets/fake directory');
+      }
+
+      print('Found ${localImages.length} images');
+      print('Uploading images to Firebase Storage...');
+      List<String> allImageUrls = await _uploadAllImages(localImages);
+
+      if (allImageUrls.isEmpty) {
+        throw Exception('Failed to upload any images');
+      }
+
+      print('Updating Firestore documents...');
+      // Get all houses
+      QuerySnapshot snapshot = await _db.collection('houses').get();
+
+      // Update each house with random images
+      for (var doc in snapshot.docs) {
+        List<String> randomImages = _getRandomImages(allImageUrls);
+
+        await _db.collection('houses').doc(doc.id).update({
+          'images': randomImages
+        });
+
+        print('Updated house ${doc.id} with ${randomImages.length} images');
+      }
+
+      print('Successfully completed updating all houses!');
+
+    } catch (e) {
+      print('Error in updateAllHousesImages: $e');
+      rethrow;
+    }
   }
 }

@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           Positioned(
-            bottom: 20,
+            bottom: 120,
             left: 20,
             child: Column(
               children: [
@@ -317,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
-                      width: _houseManager.applyPolygonFilter ? 50 : 0,
+                      width: _houseManager.applyPolygonFilter ? 0 : 0,
                       child: _houseManager.applyPolygonFilter
                           ? buildFloatingButton(
                         tag: 'Cancel Filter+Draw Button',
