@@ -1,9 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 import '../helpers/CachedTileProvider.dart';
 import '../l10n/l10n.dart';
 import '../values/structures.dart';

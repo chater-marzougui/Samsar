@@ -58,7 +58,7 @@ class MyAppState extends State<MyApp> {
   }
 
   Future<void> _loadLocale() async {
-    final savedLocale = widget.appPreferences.getPreferredLanguage(); // Assuming this method exists in AppPreferences
+    final savedLocale = widget.appPreferences.getPreferredLanguage();
     setState(() {
       _locale = Locale(savedLocale);
     });

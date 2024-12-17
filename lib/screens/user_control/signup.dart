@@ -154,149 +154,153 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sign Up"),
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const Text(
-                'Create an Account',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+    final theme = Theme.of(context);
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Sign Up", style: theme.textTheme.titleMedium),
+          foregroundColor: theme.textTheme.titleMedium?.color,
+          backgroundColor: Color.fromARGB(49, 68, 138, 255),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const Text(
+                  'Create an Account',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueAccent,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: _pickImage,
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[300],
-                  backgroundImage: _selectedImage != null ? FileImage(_selectedImage!) : null,
-                  child: _selectedImage == null
-                      ? const Icon(Icons.camera_alt, size: 40, color: Colors.grey)
-                      : null,
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: _pickImage,
+                  child: CircleAvatar(
+                    radius: 65,
+                    backgroundColor: Colors.grey[300],
+                    backgroundImage: _selectedImage != null ? FileImage(_selectedImage!) : null,
+                    child: _selectedImage == null
+                        ? const Icon(Icons.camera_alt, size: 40, color: Colors.grey)
+                        : null,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _firstNameController,
-                decoration: InputDecoration(
-                  labelText: 'First Name',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  prefixIcon: const Icon(Icons.person),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _firstNameController,
+                  decoration: InputDecoration(
+                    labelText: 'First Name',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    prefixIcon: const Icon(Icons.person),
+                  ),
+                  validator: (value) => value!.isEmpty ? 'Please enter your first name' : null,
                 ),
-                validator: (value) => value!.isEmpty ? 'Please enter your first name' : null,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _middleNameController,
-                decoration: InputDecoration(
-                  labelText: 'Middle Name',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  prefixIcon: const Icon(Icons.person),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _middleNameController,
+                  decoration: InputDecoration(
+                    labelText: 'Middle Name',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    prefixIcon: const Icon(Icons.person),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _lastNameController,
-                decoration: InputDecoration(
-                  labelText: 'Last Name',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  prefixIcon: const Icon(Icons.person),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _lastNameController,
+                  decoration: InputDecoration(
+                    labelText: 'Last Name',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    prefixIcon: const Icon(Icons.person),
+                  ),
+                  validator: (value) => value!.isEmpty ? 'Please enter your last name' : null,
                 ),
-                validator: (value) => value!.isEmpty ? 'Please enter your last name' : null,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  prefixIcon: const Icon(Icons.email),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    prefixIcon: const Icon(Icons.email),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) => value!.isEmpty ? 'Please enter your email' : null,
                 ),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) => value!.isEmpty ? 'Please enter your email' : null,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  prefixIcon: const Icon(Icons.lock),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    prefixIcon: const Icon(Icons.lock),
+                  ),
+                  obscureText: true,
+                  validator: (value) => value!.isEmpty ? 'Please enter a password' : null,
                 ),
-                obscureText: true,
-                validator: (value) => value!.isEmpty ? 'Please enter a password' : null,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _confirmPasswordController,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                  prefixIcon: const Icon(Icons.lock),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+                    prefixIcon: const Icon(Icons.lock),
+                  ),
+                  obscureText: true,
+                  validator: (value) => value!.isEmpty ? 'Please confirm your password' : null,
                 ),
-                obscureText: true,
-                validator: (value) => value!.isEmpty ? 'Please confirm your password' : null,
-              ),
-              const SizedBox(height: 20),
-              buildPhoneNumberField(_phoneNumberController, _selectedDialogCountry, _openCountryPickerDialog),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () => _pickDate(context),
-                child: InputDecorator(
+                const SizedBox(height: 20),
+                buildPhoneNumberField(_phoneNumberController, _selectedDialogCountry, _openCountryPickerDialog),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () => _pickDate(context),
+                  child: InputDecorator(
+                    decoration: const InputDecoration(
+                      labelText: 'Birthdate',
+                      border: OutlineInputBorder(),
+                    ),
+                    child: Text(
+                      _selectedDate == null
+                          ? 'Select your birthdate'
+                          : '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                DropdownButtonFormField<String>(
+                  value: _selectedGender,
                   decoration: const InputDecoration(
-                    labelText: 'Birthdate',
+                    labelText: 'Gender',
                     border: OutlineInputBorder(),
                   ),
-                  child: Text(
-                    _selectedDate == null
-                        ? 'Select your birthdate'
-                        : '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
+                  items: ['Male', 'Female', 'Other'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedGender = newValue;
+                    });
+                  },
+                  validator: (value) => value == null ? 'Please select your gender' : null,
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: _signup,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                  child: Text('Sign Up', style: theme.textTheme.titleMedium),
                 ),
-              ),
-              const SizedBox(height: 20),
-              DropdownButtonFormField<String>(
-                value: _selectedGender,
-                decoration: const InputDecoration(
-                  labelText: 'Gender',
-                  border: OutlineInputBorder(),
-                ),
-                items: ['Male', 'Female', 'Other'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedGender = newValue;
-                  });
-                },
-                validator: (value) => value == null ? 'Please select your gender' : null,
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: _signup,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: const Text('Sign Up'),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

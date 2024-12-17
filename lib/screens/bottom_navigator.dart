@@ -17,18 +17,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  // Add this static method
-  static void switchToHomeTab(BuildContext context) {
-    final state = context.findAncestorStateOfType<State<HomePage>>();
-    if (state != null && state is _HomePageState) {
-      state.setState(() {
-        state._selectedIndex = 0;
-      });
+  static void switchToPage(BuildContext context, int index) {
+    final state = context.findAncestorStateOfType<_HomePageState>();
+    if (state != null) {
+      state._onItemTapped(index);
     }
   }
 
   @override
   State<HomePage> createState() => _HomePageState();
+
 }
 
 class _HomePageState extends State<HomePage> {
@@ -42,7 +40,6 @@ class _HomePageState extends State<HomePage> {
   late final List<Widget> _pages;
   late final List<Widget> _pageWidgets;
   final List<bool> _pagesUnderNav = [true, true, false, false, false];
-
 
   void _onItemTapped(int index) {
     setState(() {

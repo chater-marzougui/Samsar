@@ -266,10 +266,11 @@ class HouseManager {
 
   Marker _createMarker(House house) {
     _addToRegionsAndDistricts(house);
+    const double size = 30;
     return Marker(
       point: LatLng(house.location.latitude, house.location.longitude),
-      width: 40,
-      height: 40,
+      width: size,
+      height: size,
       rotate: true,
       child: GestureDetector(
         onTap: () {
@@ -277,14 +278,27 @@ class HouseManager {
             onHouseTap!(house.id);
           }
         },
-        child: Image.asset(
-          'assets/icons/home_loc.png',
-          height: 40,
-          width: 40,
+        child: TweenAnimationBuilder<double>(
+          tween: Tween<double>(begin: 0.0, end: 1.0),
+          duration: Duration(milliseconds: 600),
+          curve: Curves.easeOutBack,
+          builder: (context, value, child) {
+            double scaleFactor = value < 0.7 ? value * 1.3 : (2 - value) * 1.3;
+            return Transform.scale(
+              scale: scaleFactor,
+              child: child,
+            );
+          },
+          child: Image.asset(
+            'assets/icons/home_loc.png',
+            height: size,
+            width: size,
+          ),
         ),
       ),
     );
   }
+
 
   void updateShownLevel(int level) {
     _shownLevel = level;
@@ -342,5 +356,4 @@ class HouseManager {
     }
     return housesWithDistance;
   }
-
 }

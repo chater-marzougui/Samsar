@@ -522,7 +522,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
                           focusNode: _commentFocusNode,
                           decoration: InputDecoration(
                             labelText: S.of(context).comment,
-                            hintText: S.of(context).hintText,
+                            hintText: S.of(context).addCommentOptional,
                             hintStyle: TextStyle(color: Colors.grey[500]),
                           ),
                           onSaved: (value) => _comment = value!,
@@ -713,7 +713,7 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
         List<String> imageUrls = await _uploadImages();
 
         final house = {
-          "priorityLevel": 3,
+          "priorityLevel": 5,
           'images': imageUrls,
           'comment': _comment,
           'owner': {
@@ -773,26 +773,29 @@ class _HouseUploadPageState extends State<HouseUploadPage> {
         });
 
         HouseManager().fetchHouses();
+        await _userManager.updateUserHouses();
+        if(mounted) showSnackBar(context, S.of(context).houseUploadedSuccess);
+
         setState(() {
+          _currentStep = 0;
+          _mainImage = null;
+          _images.clear();
           _formKey.currentState!.reset();
           _isLoading = false;
-          _currentStep = 0;
         });
-        if (mounted) {
-          showSnackBar(context, S.of(context).houseUploadedSuccess);
 
-          if (context.mounted) {
-            HomePage.switchToHomeTab(context);
-          }
-
-          if (context.mounted) {
-            Navigator.pushNamed(
-                context,
-                AppRoutes.houseDetails,
-                arguments: houseId
-            );
-          }
+        if (context.mounted && mounted) {
+          HomePage.switchToPage(context, 1);
         }
+
+        if (context.mounted && mounted) {
+          Navigator.pushNamed(
+              context,
+              AppRoutes.houseDetails,
+              arguments: houseId
+          );
+        }
+
       } catch (e) {
         setState(() {
           _isLoading = false;
